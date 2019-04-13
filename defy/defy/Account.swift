@@ -19,5 +19,5 @@ class Account {
     var balance: Double = 0
     var interestRate: Double = 6
     
-    var isPlaidConnected: Bool = true
+    var isPlaidConnected: Bool = false
 }
