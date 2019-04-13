@@ -21,7 +21,7 @@ class Account {
     var addressHex: String = ""
     var address: EthAddress?
     let privateKey = EthPrivateKey(
-        hex: ""
+        hex: "YOUR PRIVATE KEY"
     )
     
     var delegate: ViewControllerDelegate?

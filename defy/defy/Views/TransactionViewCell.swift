@@ -29,8 +29,8 @@ class TransactionViewCell: UITableViewCell, ViewReusable, NibLoadable {
     }
     
     func setUp(hash: String, sum: Decimal) -> Void {
-        self.amount.text = "$\(sum)"
-        self.descriptionText.text = "Deposit"
+        self.amount.text = "$\(Double(sum as NSNumber).rounded(toPlaces: 2))"
+        self.descriptionText.text = "Deposit "
         self.imageView?.image = "🏦".image()
     }
     
