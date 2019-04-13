@@ -112,18 +112,26 @@ class ViewController: UITableViewController {
                     }
                 } else {
                     print("Approve is not needed")
-                    savingsService.addSupply(
-                        supply: Decimal(0.1),
-                        account: privateKey
-                    ).done { txHash in
-                        print("TX hash for supply")
-                        print("0x" + txHash)
-                    }.catch { error in
-                        print("Supplying error")
-                        print(error)
-                    }
+//                    savingsService.addSupply(
+//                        supply: Decimal(0.1),
+//                        account: privateKey
+//                    ).done { txHash in
+//                        print("TX hash for supply")
+//                        print("0x" + txHash)
+//                    }.catch { error in
+//                        print("Supplying error")
+//                        print(error)
+//                    }
                 }
             }
+            
+            try savingsService.getSupplyRate().done { rate in
+                print("Rate: ")
+                print(rate)
+            }.catch { error in
+                print("Error in fetching rates")
+            }
+            
 
         } catch { error
             print("error appeared")

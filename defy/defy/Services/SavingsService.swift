@@ -20,12 +20,18 @@ class SavingsService {
     let compoundAddress: EthAddress
     let compoundContract: CompoundWrapper
     
+    let rateModelAddress: EthAddress
+    let rateModelContract: CompoundRateModelWrapper
+    // blocks per year to callculate annual return
+    let blocksPerYear: Int = 2102400
+    
     let provider: Network
     
     let utils = EthereumUtils.shared
     
     init(network: Network) {
         self.provider = network
+        
         self.daiAddress = EthAddress(
             hex: "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"
         )
@@ -33,6 +39,7 @@ class SavingsService {
             contract: daiAddress,
             network: network
         )
+        
         self.compoundAddress = EthAddress(
             hex: "0x3fda67f7583380e67ef93072294a7fac882fd7e7"
         )
@@ -40,46 +47,15 @@ class SavingsService {
             contract: compoundAddress,
             network: network
         )
+        
+        self.rateModelAddress = EthAddress(
+            hex: "0x8ac03DF808efAe9397A9D95888230eE022B997F4"
+        )
+        self.rateModelContract = CompoundRateModelWrapper(
+            contract: rateModelAddress,
+            network: network
+        )
     }
-    
-    // Transactions
-    //    func addSupply(supply: Decimal, userAccount: EthereumPrivateKey) throws -> Promise<EthereumData> {
-    //
-    //        let userAddress = userAccount.address
-    //        let supplyAmount =  NSDecimalNumber(decimal: supply).intValue
-    //
-    //        // Dirty hack, sorry
-    //        guard let rawSupplyAmount = BigUInt(supplyAmount.description+String(repeating: "0", count: daiDecimals), radix: 10) else {
-    //            throw EthereumUtilsErrors.invalidDecimal
-    //        }
-    //        return firstly {
-    //            self.provider.eth.getTransactionCount(address: userAddress, block: .latest)
-    //        }.then { nonce in
-    //            guard let tx = self.compoundContract.supply(
-    //                assetAddress: daiAddress,
-    //                amount: rawSupplyAmount
-    //            ).createTransaction(
-    //                nonce: nonce, // Calculated on bitski side
-    //                from: userAddress,
-    //                value: EthereumQuantity(quantity: 0.eth),
-    //                gas: 200000,
-    //                gasPrice: EthereumQuantity(quantity: 12.gwei) // Calculated on bitski side
-    //            ) else {
-    //                throw EthereumUtilsErrors.invalidTx
-    //            }
-    //            let tx = try EthereumTransaction(
-    //                nonce: nonce,
-    //                gasPrice: EthereumQuantity(quantity: 12.gwei),
-    //                gas: 22000,
-    //                to: userAddress,
-    //                value: EthereumQuantity(quantity: 0.001.eth)
-    //            )
-    //            return self.provider.eth.sendRawTransaction(
-    //                transaction: tx.sign(with: userAccount, chainId: 1)
-    //            )
-    //        }
-    //
-    //    }
 }
 
 extension SavingsService {
@@ -117,6 +93,40 @@ extension SavingsService {
             return try self.decodeSupply(
                 supply: remaining
             ) >= supply
+        }
+    }
+    
+    func getSupplyRate() throws -> Promise<Decimal> {
+        
+        let market = async {
+            try self.compoundContract.markets(
+                market: self.daiAddress
+            )
+        }
+        
+        let supply = async {
+            try self.daiContract.balanceOf(
+                owner: self.compoundAddress
+            )
+        }
+        
+        let totalBorrows = try await(market).totalBorrows
+        let totalSupply = try await(supply)
+       
+        return async {
+            try self.rateModelContract.getSupplyRate(
+                market: self.daiAddress,
+                supply: totalSupply,
+                borrow: totalBorrows
+            )
+        }.map { supplyRate in
+            try self.utils.bytesToNormalizedDecimal(
+                number: UnsignedNumbersProduct(terms: [
+                    supplyRate,
+                    EthNumber(value: self.blocksPerYear) // blocks per year
+                ]),
+                decimals: 18
+            )
         }
     }
     
@@ -172,9 +182,9 @@ extension SavingsService {
         guard let rawDecimal = Decimal(
             string: try HexAsDecimalString(
                 hex: supply
-                ).value()
-            ) else {
-                throw EthereumUtilsErrors.invalidDecimal
+            ).value()
+        ) else {
+            throw EthereumUtilsErrors.invalidDecimal
         }
         
         let supply = self.utils.normalizedDecimal(

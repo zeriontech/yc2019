@@ -25,6 +25,15 @@ class EthereumUtils {
         return number / pow(Decimal(10), decimals)
     }
     
+    func bytesToNormalizedDecimal(number: BytesScalar, decimals: Int) throws -> Decimal {
+        return try stringToNormalizedDecimal(
+            number: HexAsDecimalString(
+                hex: number
+            ).value(),
+            decimals: decimals
+        )
+    }
+    
     func singMessage(message: String, signer: PrivateKey) throws -> String {
         let personalMessage = ConcatenatedBytes(
             bytes: [

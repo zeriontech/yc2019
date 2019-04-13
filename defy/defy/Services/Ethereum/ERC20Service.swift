@@ -112,7 +112,7 @@ class ABIDecoder {
             hex: DecodedABINumber(
                 abiMessage: message,
                 index: 0
-                ).value().toHexString()
+            ).value().toHexString()
         )
     }
     
