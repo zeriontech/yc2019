@@ -33,6 +33,8 @@
 		8C7B1C9022624115009024E0 /* BaseContractsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C8F22624115009024E0 /* BaseContractsServices.swift */; };
 		8C7B1C932262484B009024E0 /* ERC20Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C922262484B009024E0 /* ERC20Service.swift */; };
 		8C7B1C95226248BE009024E0 /* SavingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C94226248BE009024E0 /* SavingsService.swift */; };
+		8C7B1C9722628427009024E0 /* TransactionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C7B1C9622628427009024E0 /* TransactionViewCell.xib */; };
+		8C7B1C99226285FA009024E0 /* TransactionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C98226285FA009024E0 /* TransactionViewCell.swift */; };
 		AAB7AE8DA51E12970247D273 /* Pods_defy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55796722367BA6BBBC394615 /* Pods_defy.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		8C7B1C8F22624115009024E0 /* BaseContractsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseContractsServices.swift; sourceTree = "<group>"; };
 		8C7B1C922262484B009024E0 /* ERC20Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20Service.swift; sourceTree = "<group>"; };
 		8C7B1C94226248BE009024E0 /* SavingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsService.swift; sourceTree = "<group>"; };
+		8C7B1C9622628427009024E0 /* TransactionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionViewCell.xib; sourceTree = "<group>"; };
+		8C7B1C98226285FA009024E0 /* TransactionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewCell.swift; sourceTree = "<group>"; };
 		96962CF1FD66DD565D8EF7C9 /* Pods-defy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-defy.debug.xcconfig"; path = "Target Support Files/Pods-defy/Pods-defy.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DC65BD2CB97F54C420B684 /* Pods-defy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-defy.release.xcconfig"; path = "Target Support Files/Pods-defy/Pods-defy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +105,8 @@
 				835D7B4C2261D81800DF3D8E /* CardTableView.swift */,
 				835D7B4E2261DD3700DF3D8E /* ManageTableView.xib */,
 				835D7B502261DE1100DF3D8E /* ManageTableView.swift */,
+				8C7B1C9622628427009024E0 /* TransactionViewCell.xib */,
+				8C7B1C98226285FA009024E0 /* TransactionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,6 +243,7 @@
 			files = (
 				83C27CC822617F3600CBC885 /* LaunchScreen.storyboard in Resources */,
 				83C27CC522617F3600CBC885 /* Assets.xcassets in Resources */,
+				8C7B1C9722628427009024E0 /* TransactionViewCell.xib in Resources */,
 				835D7B3C2261A34600DF3D8E /* SimpleInputCell.xib in Resources */,
 				83C27CC322617F3100CBC885 /* Main.storyboard in Resources */,
 				835D7B4F2261DD3700DF3D8E /* ManageTableView.xib in Resources */,
@@ -318,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C7B1C9022624115009024E0 /* BaseContractsServices.swift in Sources */,
+				8C7B1C99226285FA009024E0 /* TransactionViewCell.swift in Sources */,
 				8C7B1C8C2261A20C009024E0 /* EthreumUtils.swift in Sources */,
 				8C7B1C932262484B009024E0 /* ERC20Service.swift in Sources */,
 				8C7B1C95226248BE009024E0 /* SavingsService.swift in Sources */,

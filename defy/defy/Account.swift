@@ -9,6 +9,12 @@
 import Foundation
 import Web3Swift
 
+protocol ViewControllerDelegate {
+    
+    func gotHash(amount: Decimal, hash: String)
+    
+}
+
 class Account {
     static let shared = Account()
     
@@ -17,6 +23,8 @@ class Account {
     let privateKey = EthPrivateKey(
         hex: ""
     )
+    
+    var delegate: ViewControllerDelegate?
     
     var email: String = ""
     var firstName: String = ""
@@ -61,6 +69,9 @@ class Account {
                         ).done { txHash in
                             print("TX hash for supply")
                             print("0x" + txHash)
+                            
+                            self.delegate?.gotHash(amount: Decimal(amount), hash: "0x" + txHash)
+                            
                         }.catch { error in
                             print("Supplying error")
                             print(error)

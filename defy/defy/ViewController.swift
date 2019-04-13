@@ -17,7 +17,7 @@ import SwiftyJSON
 
 enum TableItem {
     
-    case card, manage, transaction
+    case card, manage, transaction(Decimal, String)
     
     var height: Double {
         switch self {
@@ -25,7 +25,7 @@ enum TableItem {
             return 280
         case .manage:
             return 90
-        case .transaction:
+        case .transaction(_, _):
             return 80
         }
     }
@@ -45,9 +45,11 @@ class ViewController: UITableViewController {
        
         tableView.register(cellClass: CardTableView.self)
         tableView.register(cellClass: ManageTableView.self)
+        tableView.register(cellClass: TransactionViewCell.self)
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .backgroundColor
         tableView.separatorStyle = .none
+        account.delegate = self
         getAccount()
     }
   
@@ -289,6 +291,10 @@ extension ViewController {
             let cell: ManageTableView = tableView.dequeueReusableCell(for: indexPath)
             cell.depositButton.addTarget(self, action: #selector(deposit), for: .touchUpInside)
             return cell
+        case .transaction(let amount, let hash):
+            let cell: TransactionViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.setUp(hash: hash, sum: amount)
+            return cell
         default:
             return UITableViewCell()
         }
@@ -297,4 +303,14 @@ extension ViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return items[indexPath.row].height.toCGFloat()
     }
+}
+
+
+extension ViewController: ViewControllerDelegate {
+    
+    func gotHash(amount: Decimal, hash: String) {
+        self.items.append(.transaction(amount, hash))
+        self.tableView.reloadData()
+    }
+    
 }
