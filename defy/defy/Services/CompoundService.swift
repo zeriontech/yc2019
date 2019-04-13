@@ -29,13 +29,58 @@ class CompoudService {
         self.compoundContract = self.provider.eth.Contract(type: CompoundWrapper.self, address: self.compoundAddress)
     }
     
+    // Transactions
+//    func addSupply(address: EthereumAddress) throws -> BigUInt {
+//
+//    }
+//
+//
+    func approveSupplying(userAddress: EthereumAddress, supply:Decimal) throws -> Promise<EthereumData> {
+        
+        let rawApproveAmount = supply*pow(10, self.daiDecimals) as Decimal
+        
+        // Not sure about overflow
+        let hexString = String(
+            NSDecimalNumber(decimal: rawApproveAmount).intValue,
+            radix: 16
+        )
+        
+        guard let approveAmount = BigUInt(
+            hexString: hexString
+        ) else {
+            throw EthereumUtilsErrors.invalidDecimal
+        }
+        
+        guard let tx = self.daiContract.approve(
+            spender: userAddress,
+            value: approveAmount
+        ).createTransaction(
+            nonce: nil,
+            from: userAddress,
+            value: EthereumQuantity(quantity: 0.eth),
+            gas: 200000,
+            gasPrice: EthereumQuantity(quantity: 1.gwei)
+        ) else {
+            throw EthereumUtilsErrors.invalidTx
+        }
+        
+        return firstly {
+            self.provider.eth.sendTransaction(
+                transaction: tx
+            )
+        }
+    }
+}
+
+extension CompoudService {
+    
     // Calls
     func getSupplied(userAddress: EthereumAddress) -> Promise<Decimal> {
         return firstly {
             self.compoundContract.getSupplyBalance(
                 userAddress: userAddress,
                 assetAddress: self.daiAddress
-            ).call()
+                ).call()
         }.map { outputs in
             return try self.decodeSupply(param: outputs["_supply"] as Any)
         }
@@ -46,7 +91,7 @@ class CompoudService {
         return firstly {
             self.daiContract.balanceOf(
                 address: userAddress
-            ).call()
+                ).call()
         }.map { outputs in
             return try self.decodeSupply(param: outputs["_balance"] as Any)
         }
@@ -59,22 +104,12 @@ class CompoudService {
                 spender: compoundAddress
             ).call()
         }.map { outputs in
-            let left = try self.decodeSupply(
+            return try self.decodeSupply(
                 param: outputs["_remaining"] as Any
-            )
-            return left >= supply
+            ) >= supply
         }
     }
     
-    // Transactions
-//    func addSupply(address: EthereumAddress) throws -> BigUInt {
-//
-//    }
-//
-//
-//    func approveSupplying() throws -> Bool {
-//
-//    }
 }
 
 extension CompoudService {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Web3
 
 class EthereumUtils {
     
@@ -22,9 +23,14 @@ class EthereumUtils {
     func normalizedDecimal(number: Decimal, decimals: Int) -> Decimal {
         return number / pow(Decimal(10), decimals)
     }
+    
+    func getTransactionsCount(address: EthereumAddress, provider: Web3) -> Promise<EthereumQuantity> {
+        return provider.eth.getTransactionCount(address: address, block: .pending)
+    }
 }
 
 enum EthereumUtilsErrors: Error {
     case invalidDecimal
     case invalidBigUInt
+    case invalidTx
 }

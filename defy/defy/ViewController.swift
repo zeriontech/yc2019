@@ -70,6 +70,15 @@ class ViewController: UIViewController {
                         print("Compound allowance error")
                         print(error)
                     }
+                    
+                    try compound.approveSupplying(
+                        userAddress: account,
+                        supply: 1
+                    ).done { txHash in
+                        print("TX hash")
+                        print(txHash)
+                    }
+                    
                 }
             } catch { error
                 print(error)
