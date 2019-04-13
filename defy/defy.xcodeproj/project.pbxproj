@@ -46,7 +46,6 @@
 				96962CF1FD66DD565D8EF7C9 /* Pods-defy.debug.xcconfig */,
 				F4DC65BD2CB97F54C420B684 /* Pods-defy.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -381,7 +380,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.zerion.defy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -400,7 +399,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.zerion.defy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

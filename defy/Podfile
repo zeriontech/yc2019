@@ -6,6 +6,11 @@ target 'defy' do
   use_frameworks!
 
   # Pods for defy
-  pod 'Bitski'
+    pod 'Bitski', '0.4.1'
+    pod 'Web3', '0.3.0'
+    pod 'Web3/PromiseKit', '0.3.0'
+    pod 'Web3/ContractABI', '0.3.0'
+    pod 'PromiseKit'
+    pod 'Sourcery'
 
 end
