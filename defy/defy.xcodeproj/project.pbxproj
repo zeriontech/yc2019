@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835D7B32226194F200DF3D8E /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B31226194F200DF3D8E /* Configuration.swift */; };
 		83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C27CBD22617F3100CBC885 /* AppDelegate.swift */; };
 		83C27CC022617F3100CBC885 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C27CBF22617F3100CBC885 /* ViewController.swift */; };
 		83C27CC322617F3100CBC885 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C27CC122617F3100CBC885 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		55796722367BA6BBBC394615 /* Pods_defy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_defy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		835D7B31226194F200DF3D8E /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		83C27CBA22617F3100CBC885 /* defy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = defy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C27CBD22617F3100CBC885 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83C27CBF22617F3100CBC885 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			children = (
 				83C27CBD22617F3100CBC885 /* AppDelegate.swift */,
 				83C27CBF22617F3100CBC885 /* ViewController.swift */,
+				835D7B31226194F200DF3D8E /* Configuration.swift */,
 				83C27CC122617F3100CBC885 /* Main.storyboard */,
 				83C27CC422617F3600CBC885 /* Assets.xcassets */,
 				83C27CC622617F3600CBC885 /* LaunchScreen.storyboard */,
@@ -171,6 +174,7 @@
 				"${BUILT_PRODUCTS_DIR}/BigInt.swift/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/Bitski/Bitski.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${PODS_ROOT}/Plaid/ios/LinkKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/Web3/Web3.framework",
@@ -184,6 +188,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bitski.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LinkKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Web3.framework",
@@ -223,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				835D7B32226194F200DF3D8E /* Configuration.swift in Sources */,
 				83C27CC022617F3100CBC885 /* ViewController.swift in Sources */,
 				83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */,
 			);

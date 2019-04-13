@@ -12,5 +12,6 @@ target 'defy' do
     pod 'Web3/ContractABI', '0.3.0'
     pod 'PromiseKit'
     pod 'Sourcery'
+    pod 'Plaid'
 
 end

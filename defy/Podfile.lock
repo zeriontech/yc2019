@@ -12,6 +12,7 @@ PODS:
     - Web3/ContractABI (~> 0.3.0)
     - Web3/PromiseKit (~> 0.3.0)
   - CryptoSwift (0.15.0)
+  - Plaid (1.1.17)
   - PromiseKit (6.8.4):
     - PromiseKit/CorePromise (= 6.8.4)
     - PromiseKit/Foundation (= 6.8.4)
@@ -41,6 +42,7 @@ PODS:
 
 DEPENDENCIES:
   - Bitski (= 0.4.1)
+  - Plaid
   - PromiseKit
   - Sourcery
   - Web3 (= 0.3.0)
@@ -54,6 +56,7 @@ SPEC REPOS:
     - BigInt.swift
     - Bitski
     - CryptoSwift
+    - Plaid
     - PromiseKit
     - secp256k1.swift
     - SipHash
@@ -66,12 +69,13 @@ SPEC CHECKSUMS:
   BigInt.swift: 1e0ddf08d82166e72dfb0fa8d40301d273081afc
   Bitski: 5e238bff9ef232e5817ce6f30e51170cb2ca3984
   CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
+  Plaid: 9640a2b800467e02e9904003dd11a0d3e3bd481a
   PromiseKit: 51794a832647e7b819336dc2279039ce9f1cc49b
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Sourcery: 3e55aad9719ee5782ab81eb16addd44d272e4d13
   Web3: 94f87f301a94cfb064d90baf25e2d3603c332551
 
-PODFILE CHECKSUM: 4d08261b0f9064e475a74f4d44641788fef91efa
+PODFILE CHECKSUM: f51329d218f345779920b736987af77b887dfd6c
 
 COCOAPODS: 1.6.1

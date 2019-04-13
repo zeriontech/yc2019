@@ -54,5 +54,24 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>org-appextension-feature-password-management</string>
+	</array>
+	<key>PLKPlaidLinkConfiguration</key>
+	<dict>
+		<key>apiVersion</key>
+		<string>Default</string>
+		<key>clientName</key>
+		<string>Defy</string>
+		<key>env</key>
+		<string>sandbox</string>
+		<key>key</key>
+		<string>b8d8449c9ff4dea30cd8adc46bb52f</string>
+		<key>product</key>
+		<string>auth</string>
+		<key>selectAccount</key>
+		<false/>
+	</dict>
 </dict>
 </plist>
