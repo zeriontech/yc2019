@@ -16,6 +16,7 @@
 		835D7B422261A5F200DF3D8E /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B412261A5F200DF3D8E /* UITableView.swift */; };
 		835D7B442261B00200DF3D8E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B432261B00200DF3D8E /* Account.swift */; };
 		835D7B462261B08900DF3D8E /* SignupFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B452261B08900DF3D8E /* SignupFlowController.swift */; };
+		835D7B482261CB0A00DF3D8E /* NextButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835D7B472261CB0A00DF3D8E /* NextButtonView.xib */; };
 		83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C27CBD22617F3100CBC885 /* AppDelegate.swift */; };
 		83C27CC022617F3100CBC885 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C27CBF22617F3100CBC885 /* ViewController.swift */; };
 		83C27CC322617F3100CBC885 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C27CC122617F3100CBC885 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		835D7B412261A5F200DF3D8E /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		835D7B432261B00200DF3D8E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		835D7B452261B08900DF3D8E /* SignupFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFlowController.swift; sourceTree = "<group>"; };
+		835D7B472261CB0A00DF3D8E /* NextButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextButtonView.xib; sourceTree = "<group>"; };
 		83C27CBA22617F3100CBC885 /* defy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = defy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C27CBD22617F3100CBC885 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83C27CBF22617F3100CBC885 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		835D7B492261CB3E00DF3D8E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				835D7B3B2261A34600DF3D8E /* SimpleInputCell.xib */,
+				835D7B3D2261A4C200DF3D8E /* SimpleInputCell.swift */,
+				835D7B472261CB0A00DF3D8E /* NextButtonView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		83C27CB122617F3100CBC885 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +100,7 @@
 		83C27CBC22617F3100CBC885 /* defy */ = {
 			isa = PBXGroup;
 			children = (
+				835D7B492261CB3E00DF3D8E /* Views */,
 				83C27CBD22617F3100CBC885 /* AppDelegate.swift */,
 				835D7B392261A10000DF3D8E /* MainViewController.swift */,
 				83C27CBF22617F3100CBC885 /* ViewController.swift */,
@@ -98,8 +111,6 @@
 				83C27CC122617F3100CBC885 /* Main.storyboard */,
 				83C27CC422617F3600CBC885 /* Assets.xcassets */,
 				83C27CC622617F3600CBC885 /* LaunchScreen.storyboard */,
-				835D7B3B2261A34600DF3D8E /* SimpleInputCell.xib */,
-				835D7B3D2261A4C200DF3D8E /* SimpleInputCell.swift */,
 				835D7B3F2261A51C00DF3D8E /* NibLoadable.swift */,
 				835D7B412261A5F200DF3D8E /* UITableView.swift */,
 				83C27CC922617F3600CBC885 /* Info.plist */,
@@ -179,6 +190,7 @@
 				83C27CC522617F3600CBC885 /* Assets.xcassets in Resources */,
 				835D7B3C2261A34600DF3D8E /* SimpleInputCell.xib in Resources */,
 				83C27CC322617F3100CBC885 /* Main.storyboard in Resources */,
+				835D7B482261CB0A00DF3D8E /* NextButtonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

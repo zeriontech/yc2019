@@ -47,6 +47,8 @@ class SignupViewController: UIViewController {
     
     let flowController = SignupFlowController.shared
     
+    var nextButton: UIButton?
+    
     var step: Int = 0
     
     override func viewDidLoad() {
@@ -58,6 +60,7 @@ class SignupViewController: UIViewController {
         tableView.register(cellClass: SimpleInputCell.self)
         tableView.tableFooterView = UIView()
         
+        // Set up a line above the table view
         let px = 1 / UIScreen.main.scale
         let frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: px)
         let lineFrame = CGRect(x: 16, y: 0, width: self.tableView.frame.size.width - 16, height: px)
@@ -68,6 +71,11 @@ class SignupViewController: UIViewController {
         line.backgroundColor = self.tableView.separatorColor
         
         setupViewController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.reloadInputViews()
     }
     
     func configure(step: Int) {
@@ -84,21 +92,34 @@ class SignupViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("tap")
+        self.reloadInputViews()
     }
-}
-
-extension SignupViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        proceed()
+    }
+    
+    func proceed() {
         if let navigationController = self.navigationController {
             if flowController.isLastStep(step: self.step) {
-                return true
+                return
             } else {
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
                 vc.configure(step: self.step + 1)
                 navigationController.pushViewController(vc, animated: true)
             }
         }
+    }
+}
+
+extension SignupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        proceed()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        self.nextButton?.backgroundColor = UIColor.init(red: 36/255, green: 31/255, blue: 30/255, alpha: 1)
         return true
     }
 }
@@ -113,6 +134,11 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
         let item = self.items[indexPath.row]
         
         cell.textField.delegate = self
+        let nextButtonView = Bundle.main.loadNibNamed("NextButtonView", owner: self, options: nil)?.first as! UIView?
+        cell.textField.inputAccessoryView = nextButtonView
+        let button = nextButtonView?.subviews.first as! UIButton
+        self.nextButton = button
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
         switch item {
         case .simple(let label, let placeholder):
