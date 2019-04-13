@@ -25,6 +25,10 @@ class ContractInteractor {
     let network: Network
     let contract: EthAddress
     
+    enum errors: Error {
+        case failedToSend
+    }
+    
     init(contract: EthAddress, network: Network) {
         self.contract = contract
         self.network = network
@@ -37,8 +41,29 @@ class ContractInteractor {
                 contractAddress: contract,
                 functionCall:
                 function
-                ).value().toHexString()
+            ).value().toHexString()
         )
+    }
+    
+    func send(function: EncodedABIFunction, value: EthNumber, sender: PrivateKey) throws -> BytesScalar {
+        
+        let response = try SendRawTransactionProcedure(
+            network: network,
+            transactionBytes: EthContractCallBytes(
+                network: network,
+                senderKey: sender,
+                contractAddress: contract,
+                weiAmount: value,
+                functionCall: function
+            )
+        ).call()
+        
+        guard let hash = response["result"].string else {
+            throw errors.failedToSend
+        }
+        
+        return BytesFromHexString(hex: hash)
+        
     }
     
 }

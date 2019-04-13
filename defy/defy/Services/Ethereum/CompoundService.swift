@@ -29,7 +29,7 @@ class CompoundWrapper {
     }
     
     public func getSupplyBalance(userAddress: EthAddress, assetAddress: EthAddress) throws -> EthNumber {
-        return decoder.decodeNumber(
+        return try decoder.decodeNumber(
             message: interactor.call(
                 function: encoder.getSupplyBalance(
                     address: userAddress,
@@ -39,20 +39,15 @@ class CompoundWrapper {
         )
     }
     
-//    public func supply(assetAddress: EthereumAddress, amount: BigUInt) -> SolidityInvocation {
-//        let inputs = [
-//            SolidityFunctionParameter(name: "_asset", type: .address),
-//            SolidityFunctionParameter(name: "_amount", type: .uint)
-//        ]
-//        let outputs = [SolidityFunctionParameter(name: "_supplied", type: .uint)]
-//        let method = SolidityNonPayableFunction(
-//            name: "supply",
-//            inputs: inputs,
-//            outputs: outputs,
-//            handler: self
-//        )
-//        return method.invoke(assetAddress, amount)
-//    }
+    public func supply(assetAddress: EthAddress, amount: EthNumber, sender: EthPrivateKey) throws -> BytesScalar {
+        return try interactor.send(
+            function: encoder.supply(
+                asset: assetAddress, amount: amount
+            ),
+            value: EthNumber(value: 0),
+            sender:  sender
+        )
+    }
 }
 
 class CompoundEncoder {
@@ -66,6 +61,20 @@ class CompoundEncoder {
                 ),
                 ABIAddress(
                     address: asset
+                )
+            ]
+        )
+    }
+    
+    func supply(asset: EthAddress, amount:EthNumber) -> EncodedABIFunction {
+        return EncodedABIFunction(
+            signature: "supply(address,uint256)",
+            parameters: [
+                ABIAddress(
+                    address: asset
+                ),
+                ABIUnsignedNumber(
+                    origin: amount
                 )
             ]
         )

@@ -6,9 +6,7 @@
 //  Copyright © 2019 Zerion. All rights reserved.
 //
 
-import Alamofire
 import PromiseKit
-import AlamofireObjectMapper
 
 protocol IWyreService {
     

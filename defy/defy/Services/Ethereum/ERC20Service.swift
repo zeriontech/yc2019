@@ -46,13 +46,24 @@ class ERC20Wrapper {
         )
     }
     
+    func approve(spender: EthAddress, amount: EthNumber, sender: EthPrivateKey) throws -> BytesScalar {
+        return try interactor.send(
+            function: encoder.approve(
+                spender: spender,
+                value: amount
+            ),
+            value: EthNumber(value: 0),
+            sender:  sender
+        )
+    }
+    
 }
 
 class ERC20Encoder: ABIEncoder {
     
     func balanceOf(owner: EthAddress) -> EncodedABIFunction {
         return encode(
-            function: "balanceOf()",
+            function: "balanceOf(address)",
             parameters: [
                 ABIAddress(
                     address: owner

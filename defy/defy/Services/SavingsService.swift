@@ -8,22 +8,24 @@
 
 import Foundation
 import Web3Swift
+import AwaitKit
+import PromiseKit
 
-class CompoudService {
+class SavingsService {
     
     let daiAddress: EthAddress
     let daiContract: ERC20Wrapper
     let daiDecimals = 18
     
     let compoundAddress: EthAddress
-    //let compoundContract: CompoundWrapper
+    let compoundContract: CompoundWrapper
     
-    let provider: Web3
+    let provider: Network
     
     let utils = EthereumUtils.shared
     
-    init(network: Network) throws {
-        self.provider = provider
+    init(network: Network) {
+        self.provider = network
         self.daiAddress = EthAddress(
             hex: "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"
         )
@@ -80,79 +82,90 @@ class CompoudService {
     //    }
 }
 
-extension CompoudService {
+extension SavingsService {
     
-    // Calls
-    //    func getSupplied(userAddress: EthereumAddress) -> Promise<Decimal> {
-    //        return firstly {
-    //            self.compoundContract.getSupplyBalance(
-    //                userAddress: userAddress,
-    //                assetAddress: self.daiAddress
-    //            ).call()
-    //        }.map { outputs in
-    //            return try self.decodeSupply(param: outputs["_supply"] as Any)
-    //        }
-    //    }
+     //Calls
+    func getSupplied(userAddress: EthAddress) -> Promise<Decimal> {
+        return async {
+            try self.compoundContract.getSupplyBalance(
+                userAddress: userAddress,
+                assetAddress: self.daiAddress
+            )
+        }.map { balance in
+            try self.decodeSupply(supply: balance)
+        }
+    }
     
     func getAvailableSupply(userAddress: EthAddress) -> Promise<Decimal> {
-        return await {
+        return async {
             try self.daiContract.balanceOf(
                 owner: userAddress
             )
-            }.map { balance in
-                try self.decodeSupply(balance)
+        }.map { balance in
+            try self.decodeSupply(supply: balance)
         }
     }
     
-    func supplyingIsApproved(userAddress: EthereumAddress, supply: Decimal) -> Promise<Bool> {
+    func supplyingIsApproved(userAddress: EthAddress, supply: Decimal) -> Promise<Bool> {
         return async {
-            self.daiContract.allowance(
+            try self.daiContract.allowance(
                 owner: userAddress,
-                spender: compoundAddress
+                spender: self.compoundAddress
             )
-            }.map { remaining in
-                return try self.decodeSupply(
-                    remaining
-                    ) >= supply
+        }.map { remaining in
+            print(try HexAsDecimalString(hex: remaining).value())
+            return try self.decodeSupply(
+                supply: remaining
+            ) >= supply
         }
     }
     
 }
 
-extension CompoudService {
+extension SavingsService {
     
     // Approve spending of DAI for Compound contract
-    func approveSupplying(userAddress: EthereumAddress, supply:Decimal) throws -> Promise<EthereumData> {
-        let approveAmount =  NSDecimalNumber(decimal: supply+1).intValue
+    func approveSupplying(supply:Decimal, account: EthPrivateKey) -> Promise<String> {
         
-        // Dirty hack, sorry
-        guard let rawApproveAmount = BigUInt(approveAmount.description+String(repeating: "0", count: daiDecimals), radix: 10) else {
-            throw EthereumUtilsErrors.invalidDecimal
-        }
+        let supplyAmount = EthNumber(
+            decimal: (supply * pow(10, daiDecimals)).description
+        )
         
-        guard let tx = self.daiContract.approve(
-            spender: self.compoundAddress,
-            value: rawApproveAmount
-            ).createTransaction(
-                nonce: nil, // Calculated on bitski side
-                from: userAddress,
-                value: EthereumQuantity(quantity: 0.eth),
-                gas: 200000,
-                gasPrice: nil // Calculated on bitski side
-            ) else {
-                throw EthereumUtilsErrors.invalidTx
-        }
-        
-        return firstly {
-            self.provider.eth.sendTransaction(
-                transaction: tx
+        return async {
+            try self.daiContract.approve(
+                spender: self.compoundAddress,
+                amount: supplyAmount,
+                sender: account
             )
+        }.map { txHash in
+            let tx = try txHash.value().toHexString()
+            print(tx)
+            return tx
+        }
+    }
+    
+    func addSupply(supply:Decimal, account: EthPrivateKey) -> Promise<String> {
+        
+        let supplyAmount = EthNumber(
+            decimal: (supply * pow(10, daiDecimals)).description
+        )
+        
+        return async {
+            try self.compoundContract.supply(
+                assetAddress: self.daiAddress,
+                amount: supplyAmount,
+                sender: account
+            )
+        }.map { txHash in
+            let tx = try txHash.value().toHexString()
+            print(tx)
+            return tx
         }
     }
     
 }
 
-extension CompoudService {
+extension SavingsService {
     
     private func decodeSupply(supply: EthNumber) throws -> Decimal {
         
