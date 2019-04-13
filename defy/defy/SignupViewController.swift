@@ -114,6 +114,7 @@ class SignupViewController: UIViewController {
                     let account = Account.shared
                     account.isPlaidConnected = true
                     account.balance += Double(text) ?? 0
+                    account.supplyToCompound(amount: account.balance)
                 }
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as! ViewController
                 navigationController.pushViewController(vc, animated: true)

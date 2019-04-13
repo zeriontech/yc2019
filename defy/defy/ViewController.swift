@@ -41,7 +41,6 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getAccount()
         // Do any additional setup after loading the view.
        
         tableView.register(cellClass: CardTableView.self)
@@ -49,99 +48,51 @@ class ViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .backgroundColor
         tableView.separatorStyle = .none
+        getAccount()
     }
   
     func getAccount() {
-        
-        let linkViewDelegate = self
-        let linkViewController = PLKPlaidLinkViewController(delegate: linkViewDelegate)
-        if (UI_USER_INTERFACE_IDIOM() == .pad) {
-            linkViewController.modalPresentationStyle = .formSheet;
-        }
-        self.present(linkViewController, animated: true)
-        
         do {
-            let privateKey = EthPrivateKey(
-                hex: "YOUR_PRIVATE_KEY"
-            )
+            let address = EthAddress(hex: try account.privateKey.address().value().toHexString())
             
-            let address = EthAddress(hex: try privateKey.address().value().toHexString())
             var addressHex = try address.value().toHexString()
-            addressHex = "0x"+addressHex
+            addressHex = "0x" + addressHex
             print(addressHex)
             
-//            print(try EthereumUtils.shared.singMessage(message: message, signer: privateKey))
+            account.address = address
+            account.addressHex = addressHex
             
             let verifySignatureURL = "https://verify.testwyre.com/core/blockchain/verifySignature/ETH/\(addressHex)"
-            
-            print(try EthereumUtils.shared.singMessage(message: message, signer: privateKey))
-            
+
             let network = AlchemyNetwork(
                 chain: "mainnet", apiKey: "ETi2ntZoWxd6nTI1qE13Q4I1eLB8AMDl"
             )
             
             let savingsService = SavingsService(network: network)
             
-            let account = address
-            savingsService.getAvailableSupply(userAddress: account).done { balance in
-                print("DAI Balance")
-                print(balance)
-            }.catch { error in
-                print("DAI error")
-                print(error)
-            }
-            
-            savingsService.getSupplied(userAddress: account).done { balance in
+            savingsService.getSupplied(userAddress: address).done { balance in
                 print("Compound Balance")
-                print(balance)
+                self.account.balance = Double(balance as NSNumber)
             }.catch { error in
                 print("Compound error")
                 print(error)
             }
             
-            savingsService.supplyingIsApproved(
-                userAddress: account,
-                supply: Decimal(100)
-            ).done { needApprove in
-                if(needApprove) {
-                    savingsService.approveSupplying(
-                        supply: Decimal(100),
-                        account: privateKey
-                    ).done { txHash in
-                        print("TX hash")
-                        print("0x" + txHash)
-                    }.catch { error in
-                        print("Approving error")
-                        print(error)
-                    }
-                } else {
-                    print("Approve is not needed")
-//                    savingsService.addSupply(
-//                        supply: Decimal(0.1),
-//                        account: privateKey
-//                    ).done { txHash in
-//                        print("TX hash for supply")
-//                        print("0x" + txHash)
-//                    }.catch { error in
-//                        print("Supplying error")
-//                        print(error)
-//                    }
-                }
-            }
-            
             try savingsService.getSupplyRate().done { rate in
                 print("Rate: ")
-                print(rate)
+                self.account.interestRate = Double(rate as NSNumber)
+                self.tableView.reloadData()
             }.catch { error in
                 print("Error in fetching rates")
             }
           
-            Alamofire.request(verifySignatureURL, method: .post).responseJSON { (response) in
-                let value = response.result.value
-                if let value = value as? NSDictionary {
-                    self.sign(message: value["message"] as! String, id: value["id"] as! String, privateKey: privateKey)
-                }
-            }
+            // Put back for production
+//            Alamofire.request(verifySignatureURL, method: .post).responseJSON { (response) in
+//                let value = response.result.value
+//                if let value = value as? NSDictionary {
+//                    self.sign(message: value["message"] as! String, id: value["id"] as! String, privateKey: privateKey)
+//                }
+//            }
         } catch { error
             print("error appeared")
             print(error)
@@ -331,6 +282,8 @@ extension ViewController {
         case .card:
             let cell: CardTableView = tableView.dequeueReusableCell(for: indexPath)
             cell.setBalance(balance: account.balance)
+            let formattedRate = (account.interestRate * 100).rounded(toPlaces: 2)
+            cell.interestRate.text = "\(formattedRate)%"
             return cell
         case .manage:
             let cell: ManageTableView = tableView.dequeueReusableCell(for: indexPath)

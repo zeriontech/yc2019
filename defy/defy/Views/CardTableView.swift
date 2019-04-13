@@ -11,6 +11,7 @@ import UIKit
 class CardTableView: UITableViewCell, ViewReusable, NibLoadable {
     
     @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var interestRate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,9 +30,12 @@ class CardTableView: UITableViewCell, ViewReusable, NibLoadable {
     }
     
     func setBalance(balance: Double) {
-        self.balanceLabel.text = "$\(balance.rounded(toPlaces: 2))"
+        if balance == 0 {
+            self.balanceLabel.text = "Top-up your account"
+        } else {
+            self.balanceLabel.text = "$\(balance.rounded(toPlaces: 2))"
+        }
     }
-    
 }
 
 extension Double {

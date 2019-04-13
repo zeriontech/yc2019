@@ -36,8 +36,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.33%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Hf-aZ-pjb">
-                        <rect key="frame" x="44" y="94" width="68" height="29"/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                        <rect key="frame" x="44" y="94" width="69.5" height="29"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                         <color key="textColor" red="0.32953561187922942" green="0.68933612109999998" blue="0.33269928009728922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -55,6 +55,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="balanceLabel" destination="377-jn-9cX" id="NIi-lG-Djx"/>
+                <outlet property="interestRate" destination="0Hf-aZ-pjb" id="E11-dM-bCl"/>
             </connections>
             <point key="canvasLocation" x="-362.31884057971018" y="93.75"/>
         </tableViewCell>

@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.8.2)
+  - AwaitKit (5.1.0):
+    - PromiseKit (~> 6)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - CryptoSwift (1.0.0)
@@ -25,6 +27,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - AwaitKit (~> 5.1.0)
   - Plaid
   - PromiseKit
   - Sourcery
@@ -34,6 +37,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AwaitKit
     - BigInt
     - CryptoSwift
     - Plaid
@@ -46,6 +50,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  AwaitKit: a8a3d8982097ee09ac75f5c5d3952fbcc2f26f1c
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   Plaid: 9640a2b800467e02e9904003dd11a0d3e3bd481a
@@ -56,6 +61,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Web3Swift.io: 767a6d8d411ef1b9178d52bf7883ac8866f25f14
 
-PODFILE CHECKSUM: 697f9822aae4d22ec09f9c23773c7f170e285d70
+PODFILE CHECKSUM: 3972e3cfbcdf9bbae6d4f80a3fe583e476653e50
 
 COCOAPODS: 1.6.1
