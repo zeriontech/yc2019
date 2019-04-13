@@ -35,7 +35,7 @@ class ViewController: UITableViewController {
     
     //var web3: Web3?
     
-    var items: [TableItem] = [.card, .manage]
+    var items: [TableItem] = [.card, .manage, .transaction(Decimal(150), "x")]
     
     let account = Account.shared
 

@@ -16,12 +16,12 @@ extension UIColor {
 
 extension String {
     func image() -> UIImage? {
-        let size = CGSize(width: 47.5, height: 47.5)
+        let size = CGSize(width: 40, height: 40)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         UIColor.clear.set()
-        let rect = CGRect(origin: .zero, size: size)
+        let rect = CGRect(origin: CGPoint(x: 2, y: 0), size: size)
         UIRectFill(CGRect(origin: .zero, size: size))
-        (self as AnyObject).draw(in: rect, withAttributes: [.font: UIFont.systemFont(ofSize: 40)])
+        (self as AnyObject).draw(in: rect, withAttributes: [.font: UIFont.systemFont(ofSize: 32)])
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image

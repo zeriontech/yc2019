@@ -14,12 +14,16 @@ class TransactionViewCell: UITableViewCell, ViewReusable, NibLoadable {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var amount: UILabel!
     @IBOutlet weak var descriptionText: UILabel!
+    @IBOutlet weak var backGroundForIcon: UIView!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.backgroundColor = .clear
+        self.backGroundForIcon.clipsToBounds = true
+        self.backGroundForIcon.layer.cornerRadius = 16
+        self.backGroundForIcon.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
