@@ -14,9 +14,9 @@ class MainViewController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationBar.backgroundColor = UIColor.clear
+        self.navigationBar.backgroundColor = UIColor.backgroundColor
         self.navigationBar.barStyle = .default
-        self.navigationBar.barTintColor = .white
+        self.navigationBar.barTintColor = .backgroundColor
         self.navigationBar.shadowImage = UIImage()
     }
     

@@ -12,9 +12,27 @@ import Web3
 import PromiseKit
 import LinkKit
 
-class ViewController: UIViewController {
+enum TableItem {
+    
+    case card, manage, transaction
+    
+    var height: Double {
+        switch self {
+        case .card:
+            return 280
+        case .manage:
+            return 90
+        case .transaction:
+            return 80
+        }
+    }
+}
+
+class ViewController: UITableViewController {
     
     var web3: Web3?
+    
+    var items: [TableItem] = [.card, .manage]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +54,12 @@ class ViewController: UIViewController {
 //        } else {
 //            // show logged out state
 //        }
+        
+        tableView.register(cellClass: CardTableView.self)
+        tableView.register(cellClass: ManageTableView.self)
+        tableView.tableFooterView = UIView()
+        tableView.backgroundColor = .backgroundColor
+        tableView.separatorStyle = .none
     }
 
     func getAccount() {
@@ -82,5 +106,29 @@ extension ViewController: PLKPlaidLinkViewDelegate {
 //                self.handleExitWithMetadata(metadata)
             }
         }
+    }
+}
+
+extension ViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch items[indexPath.row] {
+        case .card:
+            let cell: CardTableView = tableView.dequeueReusableCell(for: indexPath)
+            cell.setBalance(balance: 1256.54)
+            return cell
+        case .manage:
+            let cell: ManageTableView = tableView.dequeueReusableCell(for: indexPath)
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return items[indexPath.row].height.toCGFloat()
     }
 }

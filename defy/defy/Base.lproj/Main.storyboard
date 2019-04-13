@@ -70,50 +70,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="368" y="21"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="rSg-yf-d6B">
+        <scene sceneID="aYJ-Q0-vHk">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="LvN-rV-CXr" customClass="ViewController" customModule="defy" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8J2-9Z-anT">
+                <tableViewController storyboardIdentifier="ViewController" id="wcJ-p5-Ckz" customClass="ViewController" customModule="defy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PQc-vg-BuC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Card" translatesAutoresizingMaskIntoConstraints="NO" id="mAp-if-OlO">
-                                <rect key="frame" x="20" y="64" width="374" height="236"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="mAp-if-OlO" secondAttribute="height" multiplier="1.586:1" id="Ggq-de-Cf1"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1,205.05" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xF-lM-18L">
-                                <rect key="frame" x="36" y="84" width="144" height="36"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Zj8-bc-edU" firstAttribute="trailing" secondItem="mAp-if-OlO" secondAttribute="trailing" constant="20" id="8ts-Je-bhG"/>
-                            <constraint firstItem="mAp-if-OlO" firstAttribute="leading" secondItem="Zj8-bc-edU" secondAttribute="leading" constant="20" id="9fC-NM-RFd"/>
-                            <constraint firstItem="mAp-if-OlO" firstAttribute="top" secondItem="Zj8-bc-edU" secondAttribute="top" constant="20" id="Vhc-wk-eju"/>
-                            <constraint firstItem="1xF-lM-18L" firstAttribute="leading" secondItem="mAp-if-OlO" secondAttribute="leading" constant="16" id="YkT-Sb-eVb"/>
-                            <constraint firstItem="1xF-lM-18L" firstAttribute="top" secondItem="mAp-if-OlO" secondAttribute="top" constant="20" id="rD7-E9-020"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Zj8-bc-edU"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Utg-uU-w1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="K5d-9Y-AQq">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K5d-9Y-AQq" id="o7a-Es-Q84">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wcJ-p5-Ckz" id="lSv-Cx-8fm"/>
+                            <outlet property="delegate" destination="wcJ-p5-Ckz" id="GP5-np-ZMA"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kg1-gp-7Wd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390" y="21"/>
+            <point key="canvasLocation" x="1255" y="21"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Card" width="698" height="440"/>
-    </resources>
 </document>
