@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835D7B32226194F200DF3D8E /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B31226194F200DF3D8E /* Configuration.swift */; };
+		835D7B3822619EE600DF3D8E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B3722619EE600DF3D8E /* SignupViewController.swift */; };
+		835D7B3A2261A10000DF3D8E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B392261A10000DF3D8E /* MainViewController.swift */; };
+		835D7B3C2261A34600DF3D8E /* SimpleInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835D7B3B2261A34600DF3D8E /* SimpleInputCell.xib */; };
+		835D7B3E2261A4C200DF3D8E /* SimpleInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B3D2261A4C200DF3D8E /* SimpleInputCell.swift */; };
+		835D7B402261A51C00DF3D8E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B3F2261A51C00DF3D8E /* NibLoadable.swift */; };
+		835D7B422261A5F200DF3D8E /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B412261A5F200DF3D8E /* UITableView.swift */; };
+		835D7B442261B00200DF3D8E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B432261B00200DF3D8E /* Account.swift */; };
+		835D7B462261B08900DF3D8E /* SignupFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B452261B08900DF3D8E /* SignupFlowController.swift */; };
+		835D7B482261CB0A00DF3D8E /* NextButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835D7B472261CB0A00DF3D8E /* NextButtonView.xib */; };
+		835D7B4B2261D6D300DF3D8E /* CardTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835D7B4A2261D6D300DF3D8E /* CardTableView.xib */; };
+		835D7B4D2261D81800DF3D8E /* CardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B4C2261D81800DF3D8E /* CardTableView.swift */; };
+		835D7B4F2261DD3700DF3D8E /* ManageTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835D7B4E2261DD3700DF3D8E /* ManageTableView.xib */; };
+		835D7B512261DE1100DF3D8E /* ManageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B502261DE1100DF3D8E /* ManageTableView.swift */; };
+		835D7B532261DEBF00DF3D8E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B522261DEBF00DF3D8E /* UIColor.swift */; };
 		83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C27CBD22617F3100CBC885 /* AppDelegate.swift */; };
 		83C27CC022617F3100CBC885 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C27CBF22617F3100CBC885 /* ViewController.swift */; };
 		83C27CC322617F3100CBC885 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C27CC122617F3100CBC885 /* Main.storyboard */; };
@@ -23,6 +38,21 @@
 
 /* Begin PBXFileReference section */
 		55796722367BA6BBBC394615 /* Pods_defy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_defy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		835D7B31226194F200DF3D8E /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		835D7B3722619EE600DF3D8E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		835D7B392261A10000DF3D8E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		835D7B3B2261A34600DF3D8E /* SimpleInputCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleInputCell.xib; sourceTree = "<group>"; };
+		835D7B3D2261A4C200DF3D8E /* SimpleInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleInputCell.swift; sourceTree = "<group>"; };
+		835D7B3F2261A51C00DF3D8E /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		835D7B412261A5F200DF3D8E /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		835D7B432261B00200DF3D8E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		835D7B452261B08900DF3D8E /* SignupFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFlowController.swift; sourceTree = "<group>"; };
+		835D7B472261CB0A00DF3D8E /* NextButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextButtonView.xib; sourceTree = "<group>"; };
+		835D7B4A2261D6D300DF3D8E /* CardTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardTableView.xib; sourceTree = "<group>"; };
+		835D7B4C2261D81800DF3D8E /* CardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableView.swift; sourceTree = "<group>"; };
+		835D7B4E2261DD3700DF3D8E /* ManageTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageTableView.xib; sourceTree = "<group>"; };
+		835D7B502261DE1100DF3D8E /* ManageTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageTableView.swift; sourceTree = "<group>"; };
+		835D7B522261DEBF00DF3D8E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		83C27CBA22617F3100CBC885 /* defy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = defy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C27CBD22617F3100CBC885 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83C27CBF22617F3100CBC885 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +91,20 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		835D7B492261CB3E00DF3D8E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				835D7B3B2261A34600DF3D8E /* SimpleInputCell.xib */,
+				835D7B3D2261A4C200DF3D8E /* SimpleInputCell.swift */,
+				835D7B472261CB0A00DF3D8E /* NextButtonView.xib */,
+				835D7B4A2261D6D300DF3D8E /* CardTableView.xib */,
+				835D7B4C2261D81800DF3D8E /* CardTableView.swift */,
+				835D7B4E2261DD3700DF3D8E /* ManageTableView.xib */,
+				835D7B502261DE1100DF3D8E /* ManageTableView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		83C27CB122617F3100CBC885 = {
 			isa = PBXGroup;
 			children = (
@@ -83,11 +127,20 @@
 			isa = PBXGroup;
 			children = (
 				8C7B1C88226198F0009024E0 /* Services */,
+				835D7B492261CB3E00DF3D8E /* Views */,
 				83C27CBD22617F3100CBC885 /* AppDelegate.swift */,
+				835D7B392261A10000DF3D8E /* MainViewController.swift */,
 				83C27CBF22617F3100CBC885 /* ViewController.swift */,
+				835D7B31226194F200DF3D8E /* Configuration.swift */,
+				835D7B452261B08900DF3D8E /* SignupFlowController.swift */,
+				835D7B3722619EE600DF3D8E /* SignupViewController.swift */,
+				835D7B432261B00200DF3D8E /* Account.swift */,
 				83C27CC122617F3100CBC885 /* Main.storyboard */,
 				83C27CC422617F3600CBC885 /* Assets.xcassets */,
 				83C27CC622617F3600CBC885 /* LaunchScreen.storyboard */,
+				835D7B3F2261A51C00DF3D8E /* NibLoadable.swift */,
+				835D7B522261DEBF00DF3D8E /* UIColor.swift */,
+				835D7B412261A5F200DF3D8E /* UITableView.swift */,
 				83C27CC922617F3600CBC885 /* Info.plist */,
 			);
 			path = defy;
@@ -184,7 +237,11 @@
 			files = (
 				83C27CC822617F3600CBC885 /* LaunchScreen.storyboard in Resources */,
 				83C27CC522617F3600CBC885 /* Assets.xcassets in Resources */,
+				835D7B3C2261A34600DF3D8E /* SimpleInputCell.xib in Resources */,
 				83C27CC322617F3100CBC885 /* Main.storyboard in Resources */,
+				835D7B4F2261DD3700DF3D8E /* ManageTableView.xib in Resources */,
+				835D7B482261CB0A00DF3D8E /* NextButtonView.xib in Resources */,
+				835D7B4B2261D6D300DF3D8E /* CardTableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +260,7 @@
 				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${PODS_ROOT}/Plaid/ios/LinkKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -216,6 +274,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwaitKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LinkKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -260,10 +319,21 @@
 				8C7B1C8C2261A20C009024E0 /* EthreumUtils.swift in Sources */,
 				8C7B1C932262484B009024E0 /* ERC20Service.swift in Sources */,
 				8C7B1C95226248BE009024E0 /* SavingsService.swift in Sources */,
+				835D7B32226194F200DF3D8E /* Configuration.swift in Sources */,
 				83C27CC022617F3100CBC885 /* ViewController.swift in Sources */,
+				835D7B402261A51C00DF3D8E /* NibLoadable.swift in Sources */,
+				835D7B3822619EE600DF3D8E /* SignupViewController.swift in Sources */,
 				83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */,
 				8C7B1C8A22619902009024E0 /* CompoundService.swift in Sources */,
 				8C7B1C8E2261FD31009024E0 /* WyreService.swift in Sources */,
+				835D7B4D2261D81800DF3D8E /* CardTableView.swift in Sources */,
+				835D7B462261B08900DF3D8E /* SignupFlowController.swift in Sources */,
+				835D7B442261B00200DF3D8E /* Account.swift in Sources */,
+				835D7B512261DE1100DF3D8E /* ManageTableView.swift in Sources */,
+				835D7B532261DEBF00DF3D8E /* UIColor.swift in Sources */,
+				835D7B422261A5F200DF3D8E /* UITableView.swift in Sources */,
+				835D7B3E2261A4C200DF3D8E /* SimpleInputCell.swift in Sources */,
+				835D7B3A2261A10000DF3D8E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,5 +14,6 @@ target 'defy' do
     pod 'Sourcery'
     pod 'Web3Swift.io'
     pod 'AwaitKit', '~> 5.1.0'
+    pod 'Plaid'
 
 end
