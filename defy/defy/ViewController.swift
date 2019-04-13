@@ -48,7 +48,26 @@ class ViewController: UIViewController {
                         print("DAI Balance")
                         print(balance)
                     }.catch { error in
-                        print("error")
+                        print("DAI error")
+                        print(error)
+                    }
+                    
+                    compound.getSupplied(userAddress: account).done { balance in
+                        print("Compound Balance")
+                        print(balance)
+                    }.catch { error in
+                        print("Compound error")
+                        print(error)
+                    }
+                    
+                    compound.supplyingIsApproved(
+                        userAddress: account,
+                        supply: Decimal(1000)
+                    ).done { balance in
+                        print("Compound Allowance Available")
+                        print(balance)
+                    }.catch { error in
+                        print("Compound allowance error")
                         print(error)
                     }
                 }
