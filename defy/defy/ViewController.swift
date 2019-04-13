@@ -7,9 +7,11 @@
 //
 
 import UIKit
-import Bitski
-import Web3
+//import Bitski
+//import Web3
 import PromiseKit
+import CryptoSwift
+import Web3Swift
 import LinkKit
 
 enum TableItem {
@@ -30,20 +32,39 @@ enum TableItem {
 
 class ViewController: UITableViewController {
     
-    var web3: Web3?
+    //var web3: Web3?
     
     var items: [TableItem] = [.card, .manage]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.getAccount()
         // Do any additional setup after loading the view.
-        
+       
         tableView.register(cellClass: CardTableView.self)
         tableView.register(cellClass: ManageTableView.self)
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .backgroundColor
         tableView.separatorStyle = .none
         
+    }
+  
+    func getAccount() {    
+        do {
+            let privateKey = EthPrivateKey(
+                hex: "PRIVATE_KEY_HERE"
+            )
+            
+            let address = try privateKey.address()
+            var addressHex = try address.value().toHexString()
+            addressHex = "0x"+addressHex
+            
+            let message = "EM3AMPYQZ4"
+            
+            print(try EthereumUtils.shared.singMessage(message: message, signer: privateKey)) 
+        } catch { error
+            print(error)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
