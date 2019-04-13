@@ -31,9 +31,11 @@ class CardTableView: UITableViewCell, ViewReusable, NibLoadable {
     
     func setBalance(balance: Double) {
         if balance == 0 {
-            self.balanceLabel.text = "Top-up your account"
+            self.balanceLabel.text = "$0"
+            self.interestRate.isHidden = true
         } else {
             self.balanceLabel.text = "$\(balance.rounded(toPlaces: 2))"
+            self.interestRate.isHidden = false
         }
     }
 }

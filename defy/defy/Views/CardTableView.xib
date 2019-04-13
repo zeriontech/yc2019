@@ -41,16 +41,33 @@
                         <color key="textColor" red="0.32953561187922942" green="0.68933612109999998" blue="0.33269928009728922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftv-je-3TH">
+                        <rect key="frame" x="341" y="50" width="33" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="a6e-tQ-6co">
+                        <rect key="frame" x="319" y="55" width="17" height="9"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="17" id="6gU-N8-v4Z"/>
+                            <constraint firstAttribute="width" secondItem="a6e-tQ-6co" secondAttribute="height" multiplier="17:9" id="DeM-st-gUx"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="0Hf-aZ-pjb" firstAttribute="leading" secondItem="377-jn-9cX" secondAttribute="leading" id="0f7-dN-KxN"/>
                     <constraint firstItem="377-jn-9cX" firstAttribute="top" secondItem="KuN-94-LPo" secondAttribute="top" constant="30" id="1Hv-wd-gop"/>
+                    <constraint firstItem="Ftv-je-3TH" firstAttribute="leading" secondItem="a6e-tQ-6co" secondAttribute="trailing" constant="5" id="6XL-vq-UuZ"/>
                     <constraint firstItem="0Hf-aZ-pjb" firstAttribute="top" secondItem="377-jn-9cX" secondAttribute="bottom" constant="8" id="8ce-DC-oOH"/>
                     <constraint firstItem="377-jn-9cX" firstAttribute="leading" secondItem="KuN-94-LPo" secondAttribute="leading" constant="24" id="XGO-Yt-U7X"/>
                     <constraint firstItem="KuN-94-LPo" firstAttribute="top" secondItem="XDa-S1-h7s" secondAttribute="top" constant="20" id="brI-nN-aQF"/>
+                    <constraint firstItem="a6e-tQ-6co" firstAttribute="centerY" secondItem="Ftv-je-3TH" secondAttribute="centerY" id="fHT-W6-vmV"/>
                     <constraint firstAttribute="trailing" secondItem="KuN-94-LPo" secondAttribute="trailing" constant="20" id="fei-KZ-hwM"/>
                     <constraint firstItem="KuN-94-LPo" firstAttribute="leading" secondItem="XDa-S1-h7s" secondAttribute="leading" constant="20" id="gFr-Xi-w1t"/>
+                    <constraint firstItem="Ftv-je-3TH" firstAttribute="trailing" secondItem="KuN-94-LPo" secondAttribute="trailing" constant="-20" id="gaj-Qg-yZh"/>
+                    <constraint firstItem="Ftv-je-3TH" firstAttribute="top" secondItem="377-jn-9cX" secondAttribute="top" id="pEK-QZ-1MN"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -62,5 +79,6 @@
     </objects>
     <resources>
         <image name="Card" width="698" height="440"/>
+        <image name="logo" width="127" height="77.5"/>
     </resources>
 </document>
