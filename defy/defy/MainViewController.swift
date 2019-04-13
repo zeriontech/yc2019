@@ -17,6 +17,7 @@ class MainViewController: UINavigationController {
         self.navigationBar.backgroundColor = UIColor.backgroundColor
         self.navigationBar.barStyle = .default
         self.navigationBar.barTintColor = .backgroundColor
+        self.navigationBar.tintColor = .black
         self.navigationBar.shadowImage = UIImage()
     }
     

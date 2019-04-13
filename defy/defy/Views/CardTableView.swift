@@ -16,6 +16,10 @@ class CardTableView: UITableViewCell, ViewReusable, NibLoadable {
         super.awakeFromNib()
         // Initialization code
         self.backgroundColor = .clear
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize.zero
+        self.layer.shadowRadius = 10
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

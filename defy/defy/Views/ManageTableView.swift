@@ -10,7 +10,8 @@ import UIKit
 
 class ManageTableView: UITableViewCell, ViewReusable, NibLoadable {
     
-    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var depositButton: UIButton!
+    @IBOutlet weak var withdrawButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

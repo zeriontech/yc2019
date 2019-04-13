@@ -55,6 +55,7 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
 
         tableView.isScrollEnabled = false
+        tableView.backgroundColor = .backgroundColor
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(cellClass: SimpleInputCell.self)
@@ -102,7 +103,8 @@ class SignupViewController: UIViewController {
     func proceed() {
         if let navigationController = self.navigationController {
             if flowController.isLastStep(step: self.step) {
-                return
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                navigationController.pushViewController(vc, animated: true)
             } else {
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
                 vc.configure(step: self.step + 1)

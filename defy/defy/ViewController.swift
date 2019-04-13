@@ -38,28 +38,34 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        // Replace redirect URL with an url scheme that will hit your native app
-        Bitski.shared = Bitski(clientID: BitskiClientID,
-                               redirectURL: URL(string: BitskiRedirectURL)!)
-        
-        Bitski.shared?.signIn() { error in
-            // Once signed in, get an instance of Web3
-            self.web3 = Bitski.shared?.getWeb3()
-            self.getAccount()
-        }
-        
-//        if Bitski.shared?.isLoggedIn == true {
-//            self.web3 = Bitski.shared?.getWeb3()
-//            // show logged in state
-//        } else {
-//            // show logged out state
-//        }
-        
         tableView.register(cellClass: CardTableView.self)
         tableView.register(cellClass: ManageTableView.self)
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .backgroundColor
         tableView.separatorStyle = .none
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "Account"
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "more-filled-black"), for: .normal)
+//        button.addTarget(self, action: #selector(self.moreButtonTapHandler), for: .touchUpInside)
+        button.tintColor = .black
+        
+        let menuBarItem = UIBarButtonItem(customView: button)
+        menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+        menuBarItem.customView?.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        menuBarItem.customView?.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        self.navigationItem.rightBarButtonItem = menuBarItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     func getAccount() {
@@ -68,7 +74,6 @@ class ViewController: UITableViewController {
                 web3.eth.accounts().firstValue
             }.done { [weak self] account in
                 print(account.hex(eip55: true))
-                // With shared configuration from Info.plist
                 if let self = self {
                     let linkViewDelegate = self
                     let linkViewController = PLKPlaidLinkViewController(delegate: linkViewDelegate)
@@ -78,6 +83,25 @@ class ViewController: UITableViewController {
                     self.present(linkViewController, animated: true)
                 }
             }
+        }
+    }
+    
+    @objc func deposit() {
+        if let navigationController = self.navigationController as? MainViewController {
+            //            navigationController.navigationItem.setHidesBackButton(true, animated: false)
+            //            navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView())
+            navigationController.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)]
+            navigationController.navigationBar.setNeedsDisplay()
+            //            navigationController.navigationItem.hidesBackButton = true
+            //            navigationController.isNavigationBarHidden = true
+        }
+        
+        Bitski.shared = Bitski(clientID: BitskiClientID,
+                               redirectURL: URL(string: BitskiRedirectURL)!)
+        Bitski.shared?.signIn() { error in
+            // Once signed in, get an instance of Web3
+            self.web3 = Bitski.shared?.getWeb3()
+            self.getAccount()
         }
     }
 }
@@ -122,6 +146,7 @@ extension ViewController {
             return cell
         case .manage:
             let cell: ManageTableView = tableView.dequeueReusableCell(for: indexPath)
+            cell.depositButton.addTarget(self, action: #selector(deposit), for: .touchUpInside)
             return cell
         default:
             return UITableViewCell()

@@ -42,6 +42,7 @@
                     <constraint firstItem="WVH-FK-4Y8" firstAttribute="leading" secondItem="HQA-pv-Bkh" secondAttribute="trailing" constant="20" id="uSO-CO-a9D"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="label" destination="HQA-pv-Bkh" id="b9z-KX-bCP"/>
                 <outlet property="textField" destination="WVH-FK-4Y8" id="ghd-e2-d6d"/>

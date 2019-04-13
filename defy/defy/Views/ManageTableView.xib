@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="100.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzA-T6-ThW" userLabel="Add money">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzA-T6-ThW" userLabel="Deposit">
                         <rect key="frame" x="20" y="10" width="177" height="80.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal">
@@ -30,7 +30,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riH-sa-unR">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riH-sa-unR" userLabel="Withdraw">
                         <rect key="frame" x="217" y="10" width="177" height="80.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal">
@@ -89,6 +89,10 @@
                     <constraint firstItem="WRQ-iL-hFk" firstAttribute="centerX" secondItem="riH-sa-unR" secondAttribute="centerX" id="veH-Lt-1c3"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="depositButton" destination="zzA-T6-ThW" id="HPa-bh-Ww8"/>
+                <outlet property="withdrawButton" destination="riH-sa-unR" id="bbJ-Nb-fnP"/>
+            </connections>
             <point key="canvasLocation" x="-10.144927536231885" y="-11.049107142857142"/>
         </tableViewCell>
     </objects>

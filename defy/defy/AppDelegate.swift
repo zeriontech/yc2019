@@ -19,19 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         
-//        if let window = window {
-//            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
-//            vc.configure(step: 0)
-//            navigationController = MainViewController(rootViewController: vc)
-//            window.rootViewController = navigationController
-//            window.makeKeyAndVisible()
-//        }
         if let window = window {
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
+            vc.configure(step: 0)
             navigationController = MainViewController(rootViewController: vc)
             window.rootViewController = navigationController
             window.makeKeyAndVisible()
         }
+//        if let window = window {
+//            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+//            navigationController = MainViewController(rootViewController: vc)
+//            window.rootViewController = navigationController
+//            window.makeKeyAndVisible()
+//        }
         return true
     }
 
