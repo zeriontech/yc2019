@@ -14,6 +14,8 @@
 		835D7B3E2261A4C200DF3D8E /* SimpleInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B3D2261A4C200DF3D8E /* SimpleInputCell.swift */; };
 		835D7B402261A51C00DF3D8E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B3F2261A51C00DF3D8E /* NibLoadable.swift */; };
 		835D7B422261A5F200DF3D8E /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B412261A5F200DF3D8E /* UITableView.swift */; };
+		835D7B442261B00200DF3D8E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B432261B00200DF3D8E /* Account.swift */; };
+		835D7B462261B08900DF3D8E /* SignupFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D7B452261B08900DF3D8E /* SignupFlowController.swift */; };
 		83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C27CBD22617F3100CBC885 /* AppDelegate.swift */; };
 		83C27CC022617F3100CBC885 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C27CBF22617F3100CBC885 /* ViewController.swift */; };
 		83C27CC322617F3100CBC885 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C27CC122617F3100CBC885 /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 		835D7B3D2261A4C200DF3D8E /* SimpleInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleInputCell.swift; sourceTree = "<group>"; };
 		835D7B3F2261A51C00DF3D8E /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		835D7B412261A5F200DF3D8E /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		835D7B432261B00200DF3D8E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		835D7B452261B08900DF3D8E /* SignupFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFlowController.swift; sourceTree = "<group>"; };
 		83C27CBA22617F3100CBC885 /* defy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = defy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C27CBD22617F3100CBC885 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83C27CBF22617F3100CBC885 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,15 +92,17 @@
 				835D7B392261A10000DF3D8E /* MainViewController.swift */,
 				83C27CBF22617F3100CBC885 /* ViewController.swift */,
 				835D7B31226194F200DF3D8E /* Configuration.swift */,
+				835D7B452261B08900DF3D8E /* SignupFlowController.swift */,
 				835D7B3722619EE600DF3D8E /* SignupViewController.swift */,
+				835D7B432261B00200DF3D8E /* Account.swift */,
 				83C27CC122617F3100CBC885 /* Main.storyboard */,
 				83C27CC422617F3600CBC885 /* Assets.xcassets */,
 				83C27CC622617F3600CBC885 /* LaunchScreen.storyboard */,
-				83C27CC922617F3600CBC885 /* Info.plist */,
 				835D7B3B2261A34600DF3D8E /* SimpleInputCell.xib */,
 				835D7B3D2261A4C200DF3D8E /* SimpleInputCell.swift */,
 				835D7B3F2261A51C00DF3D8E /* NibLoadable.swift */,
 				835D7B412261A5F200DF3D8E /* UITableView.swift */,
+				83C27CC922617F3600CBC885 /* Info.plist */,
 			);
 			path = defy;
 			sourceTree = "<group>";
@@ -252,6 +258,8 @@
 				835D7B402261A51C00DF3D8E /* NibLoadable.swift in Sources */,
 				835D7B3822619EE600DF3D8E /* SignupViewController.swift in Sources */,
 				83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */,
+				835D7B462261B08900DF3D8E /* SignupFlowController.swift in Sources */,
+				835D7B442261B00200DF3D8E /* Account.swift in Sources */,
 				835D7B422261A5F200DF3D8E /* UITableView.swift in Sources */,
 				835D7B3E2261A4C200DF3D8E /* SimpleInputCell.swift in Sources */,
 				835D7B3A2261A10000DF3D8E /* MainViewController.swift in Sources */,

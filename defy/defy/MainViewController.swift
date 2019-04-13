@@ -14,9 +14,10 @@ class MainViewController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as? SignupViewController
-        self.setViewControllers([vc!], animated: false)
-
+        self.navigationBar.backgroundColor = UIColor.clear
+        self.navigationBar.barStyle = .default
+        self.navigationBar.barTintColor = .white
+        self.navigationBar.shadowImage = UIImage()
     }
     
 

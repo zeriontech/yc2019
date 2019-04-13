@@ -21,11 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let window = window {
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
-            let mainVC = ViewController()
-            navigationController = UINavigationController(rootViewController: vc)
+            vc.configure(step: 0)
+            navigationController = MainViewController(rootViewController: vc)
             window.rootViewController = navigationController
             window.makeKeyAndVisible()
         }
+//        if let window = window {
+//            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+//            navigationController = MainViewController(rootViewController: vc)
+//            window.rootViewController = navigationController
+//            window.makeKeyAndVisible()
+//        }
         return true
     }
 
