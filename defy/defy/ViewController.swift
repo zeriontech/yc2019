@@ -34,12 +34,28 @@ class ViewController: UIViewController {
     }
 
     func getAccount() {
+        
         if let web3 = self.web3 {
-            firstly {
-                web3.eth.accounts().firstValue
-            }.done { account in
-                print(account.hex(eip55: true))
+            do {
+                let compound = try CompoudService(provider: web3)
+                
+                firstly {
+                    web3.eth.accounts().firstValue
+                }.done { account in
+                    print(account.hex(eip55: true))
+                    
+                    compound.getAvailableSupply(userAddress: account).done { balance in
+                        print("DAI Balance")
+                        print(balance)
+                    }.catch { error in
+                        print("error")
+                        print(error)
+                    }
+                }
+            } catch { error
+                print(error)
             }
+           
         }
         
     }
