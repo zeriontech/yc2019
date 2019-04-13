@@ -35,6 +35,8 @@ class ViewController: UITableViewController {
     //var web3: Web3?
     
     var items: [TableItem] = [.card, .manage]
+    
+    let account = Account.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +130,10 @@ class ViewController: UITableViewController {
     }
     
     func showPlaid() {
+        if account.isPlaidConnected {
+            initializeAddMoneyFlow()
+            return
+        }
         let linkViewDelegate = self
         let linkViewController = PLKPlaidLinkViewController(delegate: linkViewDelegate)
         if (UI_USER_INTERFACE_IDIOM() == .pad) {
@@ -197,6 +203,16 @@ class ViewController: UITableViewController {
                 print(error)
             }
         }
+        initializeAddMoneyFlow()
+    }
+    
+    func initializeAddMoneyFlow() {
+        if let navigationController = self.navigationController {
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
+            let addMoneyFlow = SignupFlowController(screens: [("Select amount", "", [.addMoney])])
+            vc.configure(step: 0, flowController: addMoneyFlow)
+            navigationController.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -243,7 +259,7 @@ extension ViewController {
         switch items[indexPath.row] {
         case .card:
             let cell: CardTableView = tableView.dequeueReusableCell(for: indexPath)
-            cell.setBalance(balance: 1256.54)
+            cell.setBalance(balance: account.balance)
             return cell
         case .manage:
             let cell: ManageTableView = tableView.dequeueReusableCell(for: indexPath)

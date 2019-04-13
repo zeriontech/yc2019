@@ -10,7 +10,7 @@ import UIKit
 
 enum SignupItem {
     
-    case simple(String, String), phone, birthday
+    case simple(String, String), phone, birthday, addMoney
     
     var title: String {
         switch self {
@@ -20,6 +20,8 @@ enum SignupItem {
             return "Phone"
         case .birthday:
             return "Birthday"
+        case .addMoney:
+            return "$"
         }
     }
     
@@ -31,6 +33,8 @@ enum SignupItem {
             return "+1 123 456 7890"
         case .birthday:
             return "Birthday"
+        case .addMoney:
+            return "0"
         }
     }
 }
@@ -44,8 +48,9 @@ class SignupViewController: UIViewController {
     var title_: String = ""
     var subtitle: String = ""
     var items: [SignupItem] = []
+    var value: String = ""
     
-    let flowController = SignupFlowController.shared
+    var flowController = SignupFlowController.shared
     
     var nextButton: UIButton?
     
@@ -79,7 +84,8 @@ class SignupViewController: UIViewController {
         self.reloadInputViews()
     }
     
-    func configure(step: Int) {
+    func configure(step: Int, flowController: SignupFlowController = SignupFlowController.shared) {
+        self.flowController = flowController
         self.step = step
         let (title, subtitle, items) = flowController.getConfig(step: step)
         self.title_ = title
@@ -97,14 +103,21 @@ class SignupViewController: UIViewController {
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        proceed()
+        let cell: SimpleInputCell = tableView.dequeueReusableCell(for: IndexPath(row: 0, section: 0))
+        proceed(text: self.value)
     }
     
-    func proceed() {
+    func proceed(text: String) {
         if let navigationController = self.navigationController {
             if flowController.isLastStep(step: self.step) {
+                if flowController.screens.count == 1 {
+                    let account = Account.shared
+                    account.isPlaidConnected = true
+                    account.balance += Double(text) ?? 0
+                }
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as! ViewController
                 navigationController.pushViewController(vc, animated: true)
+                
             } else {
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
                 vc.configure(step: self.step + 1)
@@ -116,13 +129,23 @@ class SignupViewController: UIViewController {
 
 extension SignupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        proceed()
+        self.value = textField.text ?? ""
+        proceed(text: self.value)
         return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         self.nextButton?.backgroundColor = UIColor.init(red: 36/255, green: 31/255, blue: 30/255, alpha: 1)
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let newText = text.replacingCharacters(in: textRange, with: string)
+            self.value = newText
+        }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        self.value = textField.text ?? ""
     }
 }
 
@@ -142,6 +165,9 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
         self.nextButton = button
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
+        cell.label.text = item.title
+        cell.textField.placeholder = item.placeholder
+        
         switch item {
         case .simple(let label, let placeholder):
             cell.textField.keyboardType = .default
@@ -151,6 +177,9 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textField.keyboardType = .phonePad
             cell.label.text = item.title
         case .birthday:
+            cell.label.text = item.title
+        case .addMoney:
+            cell.textField.keyboardType = .numberPad
             cell.label.text = item.title
         }
         
