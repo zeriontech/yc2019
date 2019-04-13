@@ -7,13 +7,13 @@
 //
 
 import UIKit
-//import Bitski
-//import Web3
 import PromiseKit
 import CryptoSwift
 import Web3Swift
 import AwaitKit
 import LinkKit
+import Alamofire
+import SwiftyJSON
 
 enum TableItem {
     
@@ -36,6 +36,8 @@ class ViewController: UITableViewController {
     //var web3: Web3?
     
     var items: [TableItem] = [.card, .manage]
+    
+    let account = Account.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,6 @@ class ViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .backgroundColor
         tableView.separatorStyle = .none
-        
     }
   
     func getAccount() {
@@ -67,8 +68,11 @@ class ViewController: UITableViewController {
             let address = EthAddress(hex: try privateKey.address().value().toHexString())
             var addressHex = try address.value().toHexString()
             addressHex = "0x"+addressHex
+            print(addressHex)
             
-            let message = "EM3AMPYQZ4"
+//            print(try EthereumUtils.shared.singMessage(message: message, signer: privateKey))
+            
+            let verifySignatureURL = "https://verify.testwyre.com/core/blockchain/verifySignature/ETH/\(addressHex)"
             
             print(try EthereumUtils.shared.singMessage(message: message, signer: privateKey))
             
@@ -131,12 +135,84 @@ class ViewController: UITableViewController {
             }.catch { error in
                 print("Error in fetching rates")
             }
-            
-
+          
+            Alamofire.request(verifySignatureURL, method: .post).responseJSON { (response) in
+                let value = response.result.value
+                if let value = value as? NSDictionary {
+                    self.sign(message: value["message"] as! String, id: value["id"] as! String, privateKey: privateKey)
+                }
+            }
         } catch { error
             print("error appeared")
             print(error)
         }
+    }
+    
+    func sign(message: String, id: String, privateKey: EthPrivateKey) {
+        var signed_message = ""
+        var verification_id = ""
+        do {
+            signed_message = try EthereumUtils.shared.singMessage(message: message, signer: privateKey)
+            verification_id = id
+        } catch {error
+            print(error)
+        }
+        getSession(verification_id: verification_id, signed_message: signed_message, renew: false)
+    }
+    
+    func getSession(verification_id: String, signed_message: String, renew: Bool = false) {
+        let sessionURL = "https://verify.testwyre.com/core/sessions/auth/signature"
+        let parameters: Parameters = [
+            "accountType": "INDIVIDUAL",
+            "blockchainSignId": verification_id,
+            "blockchainSignature": "0x" + signed_message,
+            "country": "US",
+            "referrerId": "AC_RZ2CU3L8YZZ"
+        ]
+        if !renew {
+            let sessionId = UserDefaults.standard.string(forKey: "sessionId") ?? ""
+            let userId = UserDefaults.standard.string(forKey: "userId") ?? ""
+            gotSession(sessionId: sessionId, userId: userId)
+        } else {
+            Alamofire.request(sessionURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
+                print(response)
+                switch response.result {
+                case .success(let json):
+                    let response = json as! NSDictionary
+                    
+                    let sessionId = response.object(forKey: "sessionId") as! String
+                    let userIdFull = response.object(forKey: "authenticatedAs")!
+                    guard let userIdString = userIdFull as? String else {
+                        return
+                    }
+                    let userId = String(userIdString.split(separator: ":")[1])
+                    UserDefaults.standard.set(sessionId, forKey: "sessionId")
+                    UserDefaults.standard.set(userId, forKey: "userId")
+                    self.gotSession(sessionId: sessionId, userId: userId)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func gotSession(sessionId: String, userId: String) {
+        print("Got session")
+        print(sessionId, userId)
+    }
+    
+    func showPlaid() {
+        if account.isPlaidConnected {
+            initializeAddMoneyFlow()
+            return
+        }
+        let linkViewDelegate = self
+        let linkViewController = PLKPlaidLinkViewController(delegate: linkViewDelegate)
+        if (UI_USER_INTERFACE_IDIOM() == .pad) {
+            linkViewController.modalPresentationStyle = .formSheet;
+        }
+        self.present(linkViewController, animated: true)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,36 +236,54 @@ class ViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-
-//    func getAccount() {
-////        if let web3 = self.web3 {
-////            firstly {
-////                web3.eth.accounts().firstValue
-////            }.done { [weak self] account in
-////                print(account.hex(eip55: true))
-////
-////            }
-////        }
-//
-//    }
     
     @objc func deposit() {
-        if let navigationController = self.navigationController as? MainViewController {
-            //            navigationController.navigationItem.setHidesBackButton(true, animated: false)
-            //            navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView())
-            navigationController.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)]
-            navigationController.navigationBar.setNeedsDisplay()
-            //            navigationController.navigationItem.hidesBackButton = true
-            //            navigationController.isNavigationBarHidden = true
-        }
+        self.showPlaid()
+    }
+    
+    func plaidConnected(publicToken: String, accountId: String) {
+        supplyPaymentMethod(publicToken: publicToken, accountId: accountId)
+    }
+    
+    func supplyPaymentMethod(publicToken: String, accountId: String) {
+        let url = "https://verify.testwyre.com/core/paymentMethods"
+        let sessionId = UserDefaults.standard.string(forKey: "sessionId") ?? ""
         
-//        Bitski.shared = Bitski(clientID: BitskiClientID,
-//                               redirectURL: URL(string: BitskiRedirectURL)!)
-//        Bitski.shared?.signIn() { error in
-//            // Once signed in, get an instance of Web3
-//            self.web3 = Bitski.shared?.getWeb3()
-//            self.getAccount()
-//        }
+        let parameters: Parameters = [
+            "plaidPublicToken": publicToken,
+            "plaidAccountId": accountId,
+            "paymentMethodType": "LOCAL_TRANSFER",
+            "country": "US"
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(sessionId)",
+        ]
+        
+        Alamofire.request(url,
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: headers).responseJSON { (response) in
+            print(response)
+            switch response.result {
+            case .success(let jsonValue):
+                let json = JSON(jsonValue)
+                print("Added payment method", json)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        initializeAddMoneyFlow()
+    }
+    
+    func initializeAddMoneyFlow() {
+        if let navigationController = self.navigationController {
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
+            let addMoneyFlow = SignupFlowController(screens: [("Select amount", "", [.addMoney])])
+            vc.configure(step: 0, flowController: addMoneyFlow)
+            navigationController.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -199,8 +293,15 @@ extension ViewController: PLKPlaidLinkViewDelegate {
         String, metadata: [String : Any]?) {
         dismiss(animated: true) {
             // Handle success, e.g. by storing publicToken with your service
-            NSLog("Successfully linked account!\npublicToken: (publicToken)\nmetadata: (metadata ?? [:])")
-//                self.handleSuccessWithToken(publicToken, metadata: metadata)
+            UserDefaults.standard.set(publicToken, forKey: "plaidPublicToken")
+            guard let data = metadata else {
+                return
+            }
+            if let accounts = data["accounts"] as? NSArray {
+                if let account = accounts[0] as? [String: String] {
+                    self.plaidConnected(publicToken: publicToken, accountId: account["id"] ?? "")
+                }
+            }
         }
     }
     
@@ -209,11 +310,11 @@ extension ViewController: PLKPlaidLinkViewDelegate {
                                     metadata: [String : Any]?) {
         dismiss(animated: true) {
             if let error = error {
-                NSLog("Failed to link account due to: (error.localizedDescription)\nmetadata: (metadata ?? [:])")
+                NSLog("Failed to link account due to: \(error.localizedDescription)\nmetadata: \(metadata ?? [:])")
 //                self.handleError(error, metadata: metadata)
             }
             else {
-                NSLog("Plaid link exited with metadata: (metadata ?? [:])")
+                NSLog("Plaid link exited with metadata: \(metadata ?? [:])")
 //                self.handleExitWithMetadata(metadata)
             }
         }
@@ -229,7 +330,7 @@ extension ViewController {
         switch items[indexPath.row] {
         case .card:
             let cell: CardTableView = tableView.dequeueReusableCell(for: indexPath)
-            cell.setBalance(balance: 1256.54)
+            cell.setBalance(balance: account.balance)
             return cell
         case .manage:
             let cell: ManageTableView = tableView.dequeueReusableCell(for: indexPath)

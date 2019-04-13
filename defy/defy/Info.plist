@@ -48,9 +48,12 @@
 		<key>env</key>
 		<string>sandbox</string>
 		<key>key</key>
-		<string>b8d8449c9ff4dea30cd8adc46bb52f</string>
+		<string>0d4b379357bbc77a6342757675dac6</string>
 		<key>product</key>
-		<string>auth</string>
+		<array>
+			<string>auth</string>
+			<string>identity</string>
+		</array>
 		<key>selectAccount</key>
 		<false/>
 	</dict>

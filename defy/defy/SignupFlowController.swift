@@ -27,4 +27,10 @@ class SignupFlowController {
         return step == screens.count - 1
     }
     
+    init(screens: [(String, String, [SignupItem])]? = nil) {
+        if let screens = screens {
+            self.screens = screens
+        }
+    }
+    
 }

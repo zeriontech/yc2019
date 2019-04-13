@@ -16,4 +16,8 @@ class Account {
     var lastName: String = ""
     var phone: String = ""
     
+    var balance: Double = 0
+    var interestRate: Double = 6
+    
+    var isPlaidConnected: Bool = false
 }
