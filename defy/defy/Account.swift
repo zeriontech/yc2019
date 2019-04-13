@@ -24,7 +24,7 @@ class Account {
     var phone: String = ""
     
     var balance: Double = 0
-    var interestRate: Double = 6
+    var interestRate: Double = 0.06
     
     var isPlaidConnected: Bool = false
     
