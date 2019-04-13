@@ -13,6 +13,7 @@ target 'defy' do
     pod 'PromiseKit'
     pod 'Sourcery'
     pod 'Web3Swift.io'
+    pod 'AwaitKit', '~> 5.1.0'
     pod 'Plaid'
     pod 'Alamofire', '~> 4.7'
     pod 'SwiftyJSON', '~> 4.0'
