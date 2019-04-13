@@ -15,6 +15,9 @@
 		8C7B1C8A22619902009024E0 /* CompoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C8922619902009024E0 /* CompoundService.swift */; };
 		8C7B1C8C2261A20C009024E0 /* EthreumUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C8B2261A20C009024E0 /* EthreumUtils.swift */; };
 		8C7B1C8E2261FD31009024E0 /* WyreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C8D2261FD31009024E0 /* WyreService.swift */; };
+		8C7B1C9022624115009024E0 /* BaseContractsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C8F22624115009024E0 /* BaseContractsServices.swift */; };
+		8C7B1C932262484B009024E0 /* ERC20Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C922262484B009024E0 /* ERC20Service.swift */; };
+		8C7B1C95226248BE009024E0 /* SavingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C94226248BE009024E0 /* SavingsService.swift */; };
 		AAB7AE8DA51E12970247D273 /* Pods_defy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55796722367BA6BBBC394615 /* Pods_defy.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +33,9 @@
 		8C7B1C8922619902009024E0 /* CompoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundService.swift; sourceTree = "<group>"; };
 		8C7B1C8B2261A20C009024E0 /* EthreumUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthreumUtils.swift; sourceTree = "<group>"; };
 		8C7B1C8D2261FD31009024E0 /* WyreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WyreService.swift; sourceTree = "<group>"; };
+		8C7B1C8F22624115009024E0 /* BaseContractsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseContractsServices.swift; sourceTree = "<group>"; };
+		8C7B1C922262484B009024E0 /* ERC20Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20Service.swift; sourceTree = "<group>"; };
+		8C7B1C94226248BE009024E0 /* SavingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsService.swift; sourceTree = "<group>"; };
 		96962CF1FD66DD565D8EF7C9 /* Pods-defy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-defy.debug.xcconfig"; path = "Target Support Files/Pods-defy/Pods-defy.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DC65BD2CB97F54C420B684 /* Pods-defy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-defy.release.xcconfig"; path = "Target Support Files/Pods-defy/Pods-defy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,11 +96,22 @@
 		8C7B1C88226198F0009024E0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8C7B1C8922619902009024E0 /* CompoundService.swift */,
-				8C7B1C8B2261A20C009024E0 /* EthreumUtils.swift */,
+				8C7B1C912262482E009024E0 /* Ethereum */,
 				8C7B1C8D2261FD31009024E0 /* WyreService.swift */,
+				8C7B1C94226248BE009024E0 /* SavingsService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		8C7B1C912262482E009024E0 /* Ethereum */ = {
+			isa = PBXGroup;
+			children = (
+				8C7B1C8922619902009024E0 /* CompoundService.swift */,
+				8C7B1C8F22624115009024E0 /* BaseContractsServices.swift */,
+				8C7B1C8B2261A20C009024E0 /* EthreumUtils.swift */,
+				8C7B1C922262484B009024E0 /* ERC20Service.swift */,
+			);
+			path = Ethereum;
 			sourceTree = "<group>";
 		};
 		CA43AF735A53EEF348ED6EBE /* Frameworks */ = {
@@ -183,6 +200,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-defy/Pods-defy-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
@@ -195,6 +213,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwaitKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
@@ -237,7 +256,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C7B1C9022624115009024E0 /* BaseContractsServices.swift in Sources */,
 				8C7B1C8C2261A20C009024E0 /* EthreumUtils.swift in Sources */,
+				8C7B1C932262484B009024E0 /* ERC20Service.swift in Sources */,
+				8C7B1C95226248BE009024E0 /* SavingsService.swift in Sources */,
 				83C27CC022617F3100CBC885 /* ViewController.swift in Sources */,
 				83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */,
 				8C7B1C8A22619902009024E0 /* CompoundService.swift in Sources */,

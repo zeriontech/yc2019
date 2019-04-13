@@ -1,4 +1,6 @@
 PODS:
+  - AwaitKit (5.1.0):
+    - PromiseKit (~> 6)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - CryptoSwift (1.0.0)
@@ -22,12 +24,14 @@ PODS:
     - SwiftyJSON (~> 4.3)
 
 DEPENDENCIES:
+  - AwaitKit (~> 5.1.0)
   - PromiseKit
   - Sourcery
   - Web3Swift.io
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AwaitKit
     - BigInt
     - CryptoSwift
     - PromiseKit
@@ -38,6 +42,7 @@ SPEC REPOS:
     - Web3Swift.io
 
 SPEC CHECKSUMS:
+  AwaitKit: a8a3d8982097ee09ac75f5c5d3952fbcc2f26f1c
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   PromiseKit: 51794a832647e7b819336dc2279039ce9f1cc49b
@@ -47,6 +52,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Web3Swift.io: 767a6d8d411ef1b9178d52bf7883ac8866f25f14
 
-PODFILE CHECKSUM: 1209b5f0ceee4b84da97b09fac0c13b6d09facea
+PODFILE CHECKSUM: 629d30e5598ba44ff1977cf0637b4be15e06372d
 
 COCOAPODS: 1.6.1
