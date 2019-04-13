@@ -8,7 +8,6 @@
 
 import Alamofire
 import PromiseKit
-import AlamofireObjectMapper
 
 protocol IWyreService {
     

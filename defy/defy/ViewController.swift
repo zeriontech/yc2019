@@ -7,12 +7,11 @@
 //
 
 import UIKit
-//import Bitski
-//import Web3
 import PromiseKit
 import CryptoSwift
 import Web3Swift
 import LinkKit
+import Alamofire
 
 enum TableItem {
     
@@ -52,19 +51,91 @@ class ViewController: UITableViewController {
     func getAccount() {    
         do {
             let privateKey = EthPrivateKey(
-                hex: "PRIVATE_KEY_HERE"
+                hex: ""
             )
             
             let address = try privateKey.address()
             var addressHex = try address.value().toHexString()
             addressHex = "0x"+addressHex
+            print(addressHex)
             
-            let message = "EM3AMPYQZ4"
+//            print(try EthereumUtils.shared.singMessage(message: message, signer: privateKey))
             
-            print(try EthereumUtils.shared.singMessage(message: message, signer: privateKey)) 
+            let verifySignatureURL = "https://verify.testwyre.com/core/blockchain/verifySignature/ETH/\(addressHex)"
+            
+            Alamofire.request(verifySignatureURL, method: .post).responseJSON { (response) in
+                let value = response.result.value
+                if let value = value as? NSDictionary {
+                    self.sign(message: value["message"] as! String, id: value["id"] as! String, privateKey: privateKey)
+                }
+            }
         } catch { error
             print(error)
         }
+    }
+    
+    func sign(message: String, id: String, privateKey: EthPrivateKey) {
+        var signed_message = ""
+        var verification_id = ""
+        do {
+            signed_message = try EthereumUtils.shared.singMessage(message: message, signer: privateKey)
+            verification_id = id
+        } catch {error
+            print(error)
+        }
+        get_session(verification_id: verification_id, signed_message: signed_message)
+    }
+    
+    func get_session(verification_id: String, signed_message: String) {
+        let sessionURL = "https://verify.testwyre.com/core/sessions/auth/signature"
+        let parameters: Parameters = [
+            "accountType": "INDIVIDUAL",
+            "blockchainSignId": verification_id,
+            "blockchainSignature": "0x" + signed_message,
+            "country": "US",
+            "referrerId": "AC_RZ2CU3L8YZZ"
+        ]
+        if true {
+            let sessionId = UserDefaults.standard.string(forKey: "sessionId") ?? ""
+            let userId = UserDefaults.standard.string(forKey: "userId") ?? ""
+            gotSession(sessionId: sessionId, userId: userId)
+        } else {
+            print(parameters)
+            Alamofire.request(sessionURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
+                print(response)
+                switch response.result {
+                case .success(let json):
+                    let response = json as! NSDictionary
+                    
+                    let sessionId = response.object(forKey: "sessionId") as! String
+                    let userIdFull = response.object(forKey: "authenticatedAs")!
+                    guard let userIdString = userIdFull as? String else {
+                        return
+                    }
+                    let userId = String(userIdString.split(separator: ":")[1])
+                    UserDefaults.standard.set(sessionId, forKey: "sessionId")
+                    UserDefaults.standard.set(userId, forKey: "userId")
+                    self.gotSession(sessionId: sessionId, userId: userId)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func gotSession(sessionId: String, userId: String) {
+        print("Got session")
+        print(sessionId, userId)
+    }
+    
+    func showPlaid() {
+        let linkViewDelegate = self
+        let linkViewController = PLKPlaidLinkViewController(delegate: linkViewDelegate)
+        if (UI_USER_INTERFACE_IDIOM() == .pad) {
+            linkViewController.modalPresentationStyle = .formSheet;
+        }
+        self.present(linkViewController, animated: true)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,41 +160,9 @@ class ViewController: UITableViewController {
         super.viewDidAppear(animated)
     }
 
-    func getAccount() {
-        if let web3 = self.web3 {
-            firstly {
-                web3.eth.accounts().firstValue
-            }.done { [weak self] account in
-                print(account.hex(eip55: true))
-                if let self = self {
-                    let linkViewDelegate = self
-                    let linkViewController = PLKPlaidLinkViewController(delegate: linkViewDelegate)
-                    if (UI_USER_INTERFACE_IDIOM() == .pad) {
-                        linkViewController.modalPresentationStyle = .formSheet;
-                    }
-                    self.present(linkViewController, animated: true)
-                }
-            }
-        }
-    }
     
     @objc func deposit() {
-        if let navigationController = self.navigationController as? MainViewController {
-            //            navigationController.navigationItem.setHidesBackButton(true, animated: false)
-            //            navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView())
-            navigationController.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)]
-            navigationController.navigationBar.setNeedsDisplay()
-            //            navigationController.navigationItem.hidesBackButton = true
-            //            navigationController.isNavigationBarHidden = true
-        }
-        
-        Bitski.shared = Bitski(clientID: BitskiClientID,
-                               redirectURL: URL(string: BitskiRedirectURL)!)
-        Bitski.shared?.signIn() { error in
-            // Once signed in, get an instance of Web3
-            self.web3 = Bitski.shared?.getWeb3()
-            self.getAccount()
-        }
+        self.showPlaid()
     }
 }
 

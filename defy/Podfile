@@ -6,7 +6,7 @@ target 'defy' do
   use_frameworks!
 
   # Pods for defy
-  #pod 'Bitski', '0.4.1'
+#  pod 'Bitski', '0.4.1'
   #pod 'Web3', '0.3.0'
   #pod 'Web3/PromiseKit', '0.3.0'
   #pod 'Web3/ContractABI', '0.3.0'
@@ -14,5 +14,6 @@ target 'defy' do
     pod 'Sourcery'
     pod 'Web3Swift.io'
     pod 'Plaid'
+    pod 'Alamofire', '~> 4.7'
 
 end
