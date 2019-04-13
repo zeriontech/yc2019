@@ -1,17 +1,7 @@
 PODS:
-  - AppAuth (0.95.0)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
-  - BigInt.swift (1.0.0)
-  - Bitski (0.4.1):
-    - AppAuth (~> 0.93)
-    - BigInt.swift (~> 1.0)
-    - PromiseKit/CorePromise (~> 6.0)
-    - secp256k1.swift (~> 0.1)
-    - Web3 (~> 0.3.0)
-    - Web3/ContractABI (~> 0.3.0)
-    - Web3/PromiseKit (~> 0.3.0)
-  - CryptoSwift (0.15.0)
+  - CryptoSwift (1.0.0)
   - PromiseKit (6.8.4):
     - PromiseKit/CorePromise (= 6.8.4)
     - PromiseKit/Foundation (= 6.8.4)
@@ -21,57 +11,42 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.8.4):
     - PromiseKit/CorePromise
-  - secp256k1.swift (0.1.4)
+  - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
   - Sourcery (0.16.0)
-  - Web3 (0.3.0):
-    - Web3/Core (= 0.3.0)
-    - Web3/HTTPExtension (= 0.3.0)
-  - Web3/ContractABI (0.3.0):
-    - Web3/Core
-  - Web3/Core (0.3.0):
+  - SwiftyJSON (4.3.0)
+  - Web3Swift.io (0.0.3):
     - BigInt (~> 3.1)
-    - CryptoSwift (~> 0.8)
-    - secp256k1.swift (~> 0.1)
-  - Web3/HTTPExtension (0.3.0):
-    - Web3/Core
-  - Web3/PromiseKit (0.3.0):
-    - PromiseKit/CorePromise (~> 6.0)
-    - Web3/Core
+    - CryptoSwift (~> 1.0)
+    - secp256k1_ios (~> 0.1)
+    - SwiftyJSON (~> 4.3)
 
 DEPENDENCIES:
-  - Bitski (= 0.4.1)
   - PromiseKit
   - Sourcery
-  - Web3 (= 0.3.0)
-  - Web3/ContractABI (= 0.3.0)
-  - Web3/PromiseKit (= 0.3.0)
+  - Web3Swift.io
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - AppAuth
     - BigInt
-    - BigInt.swift
-    - Bitski
     - CryptoSwift
     - PromiseKit
-    - secp256k1.swift
+    - secp256k1_ios
     - SipHash
     - Sourcery
-    - Web3
+    - SwiftyJSON
+    - Web3Swift.io
 
 SPEC CHECKSUMS:
-  AppAuth: 137f6bb6fc9dfbaf2cf9f6fcff1d336ff0163bc6
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
-  BigInt.swift: 1e0ddf08d82166e72dfb0fa8d40301d273081afc
-  Bitski: 5e238bff9ef232e5817ce6f30e51170cb2ca3984
-  CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
+  CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   PromiseKit: 51794a832647e7b819336dc2279039ce9f1cc49b
-  secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
+  secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Sourcery: 3e55aad9719ee5782ab81eb16addd44d272e4d13
-  Web3: 94f87f301a94cfb064d90baf25e2d3603c332551
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  Web3Swift.io: 767a6d8d411ef1b9178d52bf7883ac8866f25f14
 
-PODFILE CHECKSUM: 4d08261b0f9064e475a74f4d44641788fef91efa
+PODFILE CHECKSUM: 1209b5f0ceee4b84da97b09fac0c13b6d09facea
 
 COCOAPODS: 1.6.1

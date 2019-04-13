@@ -14,6 +14,7 @@
 		83C27CC822617F3600CBC885 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C27CC622617F3600CBC885 /* LaunchScreen.storyboard */; };
 		8C7B1C8A22619902009024E0 /* CompoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C8922619902009024E0 /* CompoundService.swift */; };
 		8C7B1C8C2261A20C009024E0 /* EthreumUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C8B2261A20C009024E0 /* EthreumUtils.swift */; };
+		8C7B1C8E2261FD31009024E0 /* WyreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B1C8D2261FD31009024E0 /* WyreService.swift */; };
 		AAB7AE8DA51E12970247D273 /* Pods_defy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55796722367BA6BBBC394615 /* Pods_defy.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		83C27CC922617F3600CBC885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C7B1C8922619902009024E0 /* CompoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundService.swift; sourceTree = "<group>"; };
 		8C7B1C8B2261A20C009024E0 /* EthreumUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthreumUtils.swift; sourceTree = "<group>"; };
+		8C7B1C8D2261FD31009024E0 /* WyreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WyreService.swift; sourceTree = "<group>"; };
 		96962CF1FD66DD565D8EF7C9 /* Pods-defy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-defy.debug.xcconfig"; path = "Target Support Files/Pods-defy/Pods-defy.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DC65BD2CB97F54C420B684 /* Pods-defy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-defy.release.xcconfig"; path = "Target Support Files/Pods-defy/Pods-defy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +92,7 @@
 			children = (
 				8C7B1C8922619902009024E0 /* CompoundService.swift */,
 				8C7B1C8B2261A20C009024E0 /* EthreumUtils.swift */,
+				8C7B1C8D2261FD31009024E0 /* WyreService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -180,28 +183,25 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-defy/Pods-defy-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
-				"${BUILT_PRODUCTS_DIR}/BigInt.swift/BigInt.framework",
-				"${BUILT_PRODUCTS_DIR}/Bitski/Bitski.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
-				"${BUILT_PRODUCTS_DIR}/Web3/Web3.framework",
-				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Web3Swift.io/Web3Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bitski.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Web3.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Web3Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -241,6 +241,7 @@
 				83C27CC022617F3100CBC885 /* ViewController.swift in Sources */,
 				83C27CBE22617F3100CBC885 /* AppDelegate.swift in Sources */,
 				8C7B1C8A22619902009024E0 /* CompoundService.swift in Sources */,
+				8C7B1C8E2261FD31009024E0 /* WyreService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

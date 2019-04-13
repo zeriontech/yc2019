@@ -6,8 +6,9 @@
 //  Copyright © 2019 Zerion. All rights reserved.
 //
 
-import Foundation
-import Web3
+//import Foundation
+import Web3Swift
+import CryptoSwift
 
 class EthereumUtils {
     
@@ -24,8 +25,32 @@ class EthereumUtils {
         return number / pow(Decimal(10), decimals)
     }
     
-    func getTransactionsCount(address: EthereumAddress, provider: Web3) -> Promise<EthereumQuantity> {
-        return provider.eth.getTransactionCount(address: address, block: .pending)
+    func singMessage(message: String, signer: PrivateKey) throws -> String {
+        let personalMessage = ConcatenatedBytes(
+            bytes: [
+                //Ethereum prefix
+                UTF8StringBytes(
+                    string: "\u{19}Ethereum Signed Message:\n"
+                ),
+                UTF8StringBytes(string: String(message.count)),
+                //message
+                UTF8StringBytes(string: message)
+            ]
+        )
+        let hashFunction = SHA3(variant: .keccak256).calculate
+        let signature = SECP256k1Signature(
+            privateKey: signer,
+            message: personalMessage,
+            hashFunction: hashFunction
+        )
+        let contractSignature = ConcatenatedBytes(
+            bytes: [
+                try signature.r(),
+                try signature.s(),
+                try EthNumber(value: signature.recoverID().value() + 27)
+            ]
+        )
+        return try contractSignature.value().toHexString()
     }
 }
 
