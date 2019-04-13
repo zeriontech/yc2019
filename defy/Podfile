@@ -15,5 +15,6 @@ target 'defy' do
     pod 'Web3Swift.io'
     pod 'Plaid'
     pod 'Alamofire', '~> 4.7'
+    pod 'SwiftyJSON', '~> 4.0'
 
 end

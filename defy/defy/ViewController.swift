@@ -12,6 +12,7 @@ import CryptoSwift
 import Web3Swift
 import LinkKit
 import Alamofire
+import SwiftyJSON
 
 enum TableItem {
     
@@ -45,7 +46,6 @@ class ViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .backgroundColor
         tableView.separatorStyle = .none
-        
     }
   
     func getAccount() {    
@@ -83,10 +83,10 @@ class ViewController: UITableViewController {
         } catch {error
             print(error)
         }
-        get_session(verification_id: verification_id, signed_message: signed_message)
+        getSession(verification_id: verification_id, signed_message: signed_message, renew: false)
     }
     
-    func get_session(verification_id: String, signed_message: String) {
+    func getSession(verification_id: String, signed_message: String, renew: Bool = false) {
         let sessionURL = "https://verify.testwyre.com/core/sessions/auth/signature"
         let parameters: Parameters = [
             "accountType": "INDIVIDUAL",
@@ -95,12 +95,11 @@ class ViewController: UITableViewController {
             "country": "US",
             "referrerId": "AC_RZ2CU3L8YZZ"
         ]
-        if true {
+        if !renew {
             let sessionId = UserDefaults.standard.string(forKey: "sessionId") ?? ""
             let userId = UserDefaults.standard.string(forKey: "userId") ?? ""
             gotSession(sessionId: sessionId, userId: userId)
         } else {
-            print(parameters)
             Alamofire.request(sessionURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
                 print(response)
                 switch response.result {
@@ -164,6 +163,41 @@ class ViewController: UITableViewController {
     @objc func deposit() {
         self.showPlaid()
     }
+    
+    func plaidConnected(publicToken: String, accountId: String) {
+        supplyPaymentMethod(publicToken: publicToken, accountId: accountId)
+    }
+    
+    func supplyPaymentMethod(publicToken: String, accountId: String) {
+        let url = "https://verify.testwyre.com/core/paymentMethods"
+        let sessionId = UserDefaults.standard.string(forKey: "sessionId") ?? ""
+        
+        let parameters: Parameters = [
+            "plaidPublicToken": publicToken,
+            "plaidAccountId": accountId,
+            "paymentMethodType": "LOCAL_TRANSFER",
+            "country": "US"
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(sessionId)",
+        ]
+        
+        Alamofire.request(url,
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: headers).responseJSON { (response) in
+            print(response)
+            switch response.result {
+            case .success(let jsonValue):
+                let json = JSON(jsonValue)
+                print("Added payment method", json)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension ViewController: PLKPlaidLinkViewDelegate {
@@ -172,8 +206,15 @@ extension ViewController: PLKPlaidLinkViewDelegate {
         String, metadata: [String : Any]?) {
         dismiss(animated: true) {
             // Handle success, e.g. by storing publicToken with your service
-            NSLog("Successfully linked account!\npublicToken: (publicToken)\nmetadata: (metadata ?? [:])")
-//                self.handleSuccessWithToken(publicToken, metadata: metadata)
+            UserDefaults.standard.set(publicToken, forKey: "plaidPublicToken")
+            guard let data = metadata else {
+                return
+            }
+            if let accounts = data["accounts"] as? NSArray {
+                if let account = accounts[0] as? [String: String] {
+                    self.plaidConnected(publicToken: publicToken, accountId: account["id"] ?? "")
+                }
+            }
         }
     }
     
@@ -182,11 +223,11 @@ extension ViewController: PLKPlaidLinkViewDelegate {
                                     metadata: [String : Any]?) {
         dismiss(animated: true) {
             if let error = error {
-                NSLog("Failed to link account due to: (error.localizedDescription)\nmetadata: (metadata ?? [:])")
+                NSLog("Failed to link account due to: \(error.localizedDescription)\nmetadata: \(metadata ?? [:])")
 //                self.handleError(error, metadata: metadata)
             }
             else {
-                NSLog("Plaid link exited with metadata: (metadata ?? [:])")
+                NSLog("Plaid link exited with metadata: \(metadata ?? [:])")
 //                self.handleExitWithMetadata(metadata)
             }
         }
