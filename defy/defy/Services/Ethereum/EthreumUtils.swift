@@ -9,6 +9,7 @@
 //import Foundation
 import Web3Swift
 import CryptoSwift
+import SwiftyJSON
 
 class EthereumUtils {
     
@@ -60,6 +61,31 @@ class EthereumUtils {
             ]
         )
         return try contractSignature.value().toHexString()
+    }
+    
+    func checkTxStatus(hash: String) -> Bool {
+        
+        do {
+            let advancedInfo: JSON = try TransactionReceiptProcedure(
+                network: AlchemyNetwork(
+                    chain: "mainnet",
+                    apiKey: "ETi2ntZoWxd6nTI1qE13Q4I1eLB8AMDl"
+                ),
+                transactionHash: BytesFromHexString(
+                    hex: hash
+                )
+                ).call()
+            
+            guard advancedInfo["result"].dictionary != nil else {
+                return false
+            }
+            
+            return true
+        } catch {
+            return false
+        }
+       
+        
     }
 }
 
