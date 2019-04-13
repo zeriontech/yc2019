@@ -37,14 +37,21 @@ class ViewController: UIViewController {
         
         if let web3 = self.web3 {
             do {
-                let compound = try CompoudService(provider: web3)
+                let web3swift = Web3(rpcURL: "https://eth-mainnet.alchemyapi.io/jsonrpc/ETi2ntZoWxd6nTI1qE13Q4I1eLB8AMDl")
+                
+                let privateKey = try EthereumPrivateKey(hexPrivateKey: "PUT KEY HERE")
+                
+                print("Account 2")
+                print(privateKey.address.hex(eip55: true))
+                
+                let compound = try CompoudService(provider: web3swift)
                 
                 firstly {
                     web3.eth.accounts().firstValue
                 }.done { account in
                     print(account.hex(eip55: true))
-                    
-                    compound.getAvailableSupply(userAddress: account).done { balance in
+                    let account2 = privateKey.address
+                    compound.getAvailableSupply(userAddress: account2).done { balance in
                         print("DAI Balance")
                         print(balance)
                     }.catch { error in
@@ -52,7 +59,7 @@ class ViewController: UIViewController {
                         print(error)
                     }
                     
-                    compound.getSupplied(userAddress: account).done { balance in
+                    compound.getSupplied(userAddress: account2).done { balance in
                         print("Compound Balance")
                         print(balance)
                     }.catch { error in
@@ -61,8 +68,8 @@ class ViewController: UIViewController {
                     }
                     
                     compound.supplyingIsApproved(
-                        userAddress: account,
-                        supply: Decimal(1000)
+                        userAddress: account2,
+                        supply: Decimal(10000)
                     ).done { balance in
                         print("Compound Allowance Available")
                         print(balance)
@@ -70,14 +77,14 @@ class ViewController: UIViewController {
                         print("Compound allowance error")
                         print(error)
                     }
-                    
-                    try compound.approveSupplying(
-                        userAddress: account,
-                        supply: 1
-                    ).done { txHash in
-                        print("TX hash")
-                        print(txHash)
-                    }
+                    //Approve
+//                    try compound.approveSupplying(
+//                        userAddress: account,
+//                        supply: 10000
+//                    ).done { txHash in
+//                        print("TX hash")
+//                        print(txHash.hex())
+//                    }
                     
                 }
             } catch { error

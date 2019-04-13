@@ -30,46 +30,43 @@ class CompoudService {
     }
     
     // Transactions
-//    func addSupply(address: EthereumAddress) throws -> BigUInt {
-//
+//    func addSupply(supply: Decimal, userAccount: EthereumPrivateKey) throws -> Promise<EthereumData> {
+//        
+//        let userAddress = userAccount.address
+//        let supplyAmount =  NSDecimalNumber(decimal: supply).intValue
+//        
+//        // Dirty hack, sorry
+//        guard let rawSupplyAmount = BigUInt(supplyAmount.description+String(repeating: "0", count: daiDecimals), radix: 10) else {
+//            throw EthereumUtilsErrors.invalidDecimal
+//        }
+//        return firstly {
+//            self.provider.eth.getTransactionCount(address: userAddress, block: .latest)
+//        }.then { nonce in
+//            guard let tx = self.compoundContract.supply(
+//                assetAddress: daiAddress,
+//                amount: rawSupplyAmount
+//            ).createTransaction(
+//                nonce: nonce, // Calculated on bitski side
+//                from: userAddress,
+//                value: EthereumQuantity(quantity: 0.eth),
+//                gas: 200000,
+//                gasPrice: EthereumQuantity(quantity: 12.gwei) // Calculated on bitski side
+//            ) else {
+//                throw EthereumUtilsErrors.invalidTx
+//            }
+//            let tx = try EthereumTransaction(
+//                nonce: nonce,
+//                gasPrice: EthereumQuantity(quantity: 12.gwei),
+//                gas: 22000,
+//                to: userAddress,
+//                value: EthereumQuantity(quantity: 0.001.eth)
+//            )
+//            return self.provider.eth.sendRawTransaction(
+//                transaction: tx.sign(with: userAccount, chainId: 1)
+//            )
+//        }
+//        
 //    }
-//
-//
-    func approveSupplying(userAddress: EthereumAddress, supply:Decimal) throws -> Promise<EthereumData> {
-        
-        let rawApproveAmount = supply*pow(10, self.daiDecimals) as Decimal
-        
-        // Not sure about overflow
-        let hexString = String(
-            NSDecimalNumber(decimal: rawApproveAmount).intValue,
-            radix: 16
-        )
-        
-        guard let approveAmount = BigUInt(
-            hexString: hexString
-        ) else {
-            throw EthereumUtilsErrors.invalidDecimal
-        }
-        
-        guard let tx = self.daiContract.approve(
-            spender: userAddress,
-            value: approveAmount
-        ).createTransaction(
-            nonce: nil,
-            from: userAddress,
-            value: EthereumQuantity(quantity: 0.eth),
-            gas: 200000,
-            gasPrice: EthereumQuantity(quantity: 1.gwei)
-        ) else {
-            throw EthereumUtilsErrors.invalidTx
-        }
-        
-        return firstly {
-            self.provider.eth.sendTransaction(
-                transaction: tx
-            )
-        }
-    }
 }
 
 extension CompoudService {
@@ -107,6 +104,39 @@ extension CompoudService {
             return try self.decodeSupply(
                 param: outputs["_remaining"] as Any
             ) >= supply
+        }
+    }
+    
+}
+
+extension CompoudService {
+    
+    // Approve spending of DAI for Compound contract
+    func approveSupplying(userAddress: EthereumAddress, supply:Decimal) throws -> Promise<EthereumData> {
+        let approveAmount =  NSDecimalNumber(decimal: supply+1).intValue
+        
+        // Dirty hack, sorry
+        guard let rawApproveAmount = BigUInt(approveAmount.description+String(repeating: "0", count: daiDecimals), radix: 10) else {
+            throw EthereumUtilsErrors.invalidDecimal
+        }
+        
+        guard let tx = self.daiContract.approve(
+            spender: self.compoundAddress,
+            value: rawApproveAmount
+        ).createTransaction(
+                nonce: nil, // Calculated on bitski side
+                from: userAddress,
+                value: EthereumQuantity(quantity: 0.eth),
+                gas: 200000,
+                gasPrice: nil // Calculated on bitski side
+        ) else {
+                throw EthereumUtilsErrors.invalidTx
+        }
+        
+        return firstly {
+            self.provider.eth.sendTransaction(
+                transaction: tx
+            )
         }
     }
     
@@ -158,5 +188,20 @@ class CompoundWrapper: StaticContract {
             handler: self
         )
         return method.invoke(userAddress, assetAddress)
+    }
+    
+    public func supply(assetAddress: EthereumAddress, amount: BigUInt) -> SolidityInvocation {
+        let inputs = [
+            SolidityFunctionParameter(name: "_asset", type: .address),
+            SolidityFunctionParameter(name: "_amount", type: .uint)
+        ]
+        let outputs = [SolidityFunctionParameter(name: "_supplied", type: .uint)]
+        let method = SolidityNonPayableFunction(
+            name: "supply",
+            inputs: inputs,
+            outputs: outputs,
+            handler: self
+        )
+        return method.invoke(assetAddress, amount)
     }
 }
