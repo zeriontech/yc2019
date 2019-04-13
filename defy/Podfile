@@ -13,5 +13,6 @@ target 'defy' do
     pod 'PromiseKit'
     pod 'Sourcery'
     pod 'Web3Swift.io'
+    pod 'Plaid'
 
 end

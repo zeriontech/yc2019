@@ -12,10 +12,26 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    var navigationController: UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        if let window = window {
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
+            vc.configure(step: 0)
+            navigationController = MainViewController(rootViewController: vc)
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        }
+//        if let window = window {
+//            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+//            navigationController = MainViewController(rootViewController: vc)
+//            window.rootViewController = navigationController
+//            window.makeKeyAndVisible()
+//        }
         return true
     }
 
