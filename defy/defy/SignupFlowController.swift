@@ -14,9 +14,9 @@ class SignupFlowController {
     static let shared = SignupFlowController()
     
     var screens: [(String, String, [SignupItem])] = [
-        ("Get Started", "Enter your mobile phone number to get started.", [.simple("Phone")]),
-        ("Enter Email Address", "Enter Email Address", [.simple("Email")]),
-        ("Enter Full Name", "Enter your full legal name to continue.", [.simple("First name"), .simple("Last name")])
+        ("Get Started", "Enter your mobile phone number to get started.", [.phone]),
+        ("Enter Email Address", "Enter Email Address", [.simple("Email", "user@gmail.com")]),
+        ("Enter Full Name", "Enter your full legal name to continue.", [.simple("First name", "Sam"), .simple("Last name", "Smith")])
     ]
     
     func getConfig(step: Int) -> (String, String, [SignupItem]) {

@@ -32,19 +32,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Started" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6Z-Kq-JOq">
-                                <rect key="frame" x="121.5" y="109" width="171.5" height="38.5"/>
+                                <rect key="frame" x="121.5" y="64" width="171.5" height="38.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your mobile phone number to get started." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwU-QZ-2fn">
-                                <rect key="frame" x="35" y="177.5" width="344" height="45.5"/>
+                                <rect key="frame" x="35" y="132.5" width="344" height="45.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qEX-Qw-vHE">
-                                <rect key="frame" x="16" y="264" width="382" height="398"/>
+                                <rect key="frame" x="16" y="219" width="382" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -54,7 +54,7 @@
                             <constraint firstItem="qEX-Qw-vHE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="EMY-Ps-5mw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qEX-Qw-vHE" secondAttribute="bottom" constant="200" id="TKY-nz-N25"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DwU-QZ-2fn" secondAttribute="trailing" constant="35" id="dWP-Q5-CXT"/>
-                            <constraint firstItem="a6Z-Kq-JOq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="65" id="hzf-SD-JK0"/>
+                            <constraint firstItem="a6Z-Kq-JOq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="hzf-SD-JK0"/>
                             <constraint firstItem="DwU-QZ-2fn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="jXL-ni-gFw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qEX-Qw-vHE" secondAttribute="trailing" constant="16" id="lwP-kd-xPc"/>
                             <constraint firstItem="a6Z-Kq-JOq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="m66-nV-vfP"/>

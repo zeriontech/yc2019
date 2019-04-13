@@ -10,14 +10,25 @@ import UIKit
 
 enum SignupItem {
     
-    case simple(String), phone, birthday
+    case simple(String, String), phone, birthday
     
     var title: String {
         switch self {
-        case .simple(let label):
+        case .simple(let label, let _):
             return label
         case .phone:
-            return "+1"
+            return "Phone"
+        case .birthday:
+            return "Birthday"
+        }
+    }
+    
+    var placeholder: String {
+        switch self {
+        case .simple(let _, let placeholder):
+            return placeholder
+        case .phone:
+            return "+1 123 456 7890"
         case .birthday:
             return "Birthday"
         }
@@ -47,6 +58,15 @@ class SignupViewController: UIViewController {
         tableView.register(cellClass: SimpleInputCell.self)
         tableView.tableFooterView = UIView()
         
+        let px = 1 / UIScreen.main.scale
+        let frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: px)
+        let lineFrame = CGRect(x: 16, y: 0, width: self.tableView.frame.size.width - 16, height: px)
+        let view = UIView(frame: frame)
+        let line = UIView(frame: lineFrame)
+        view.addSubview(line)
+        tableView.tableHeaderView = view
+        line.backgroundColor = self.tableView.separatorColor
+        
         setupViewController()
     }
     
@@ -72,13 +92,12 @@ extension SignupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let navigationController = self.navigationController {
             if flowController.isLastStep(step: self.step) {
+                return true
+            } else {
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
                 vc.configure(step: self.step + 1)
                 navigationController.pushViewController(vc, animated: true)
-            } else {
-                
             }
-            
         }
         return true
     }
@@ -93,18 +112,22 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
         let cell: SimpleInputCell = tableView.dequeueReusableCell(for: indexPath)
         let item = self.items[indexPath.row]
         
-        if indexPath.row == 0 {
-            cell.textField.becomeFirstResponder()
-        }
         cell.textField.delegate = self
         
         switch item {
-        case .simple(let label):
+        case .simple(let label, let placeholder):
+            cell.textField.keyboardType = .default
             cell.label.text = label
+            cell.textField.placeholder = placeholder
         case .phone:
-            cell.label.text = "Phone"
+            cell.textField.keyboardType = .phonePad
+            cell.label.text = item.title
         case .birthday:
             cell.label.text = item.title
+        }
+        
+        if indexPath.row == 0 {
+            cell.textField.becomeFirstResponder()
         }
         return cell
     }
