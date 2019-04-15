@@ -1,4 +1,6 @@
-# Defy (Better savings account) - YC2019
+# Defy — a better savings account (YC2019)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Twitter Follow](https://img.shields.io/twitter/follow/zerion_io.svg?style=social)
 ### An app that uses benefits of Decentralized Finance (DeFi) to give people access to high-yield savings accounts.
 
 ## Inspiration
