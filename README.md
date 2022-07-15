@@ -22,7 +22,7 @@ To make the app work, we integrated several public APIs as well as Compound whic
 1. Wyre (https://www.sendwyre.com/) to verify user identity and buy DAI (a stablecoin pegged to $1) with the US dollars.
 2. Plaid (https://plaid.com/) to connect users' bank accounts
 3. Compound (https://compound.finance/) to earn interest on top of DAI
-4. Alchemy (https://alchemyapi.io) to propagate transactions to the Ethereum network
+4. Alchemy (https://www.alchemy.com/) to propagate transactions to the Ethereum network
 5. Ethereum as the underlying smart-contract technology that enables Open Finance 
 
 ## Authors
